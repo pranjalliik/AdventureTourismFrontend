@@ -18,8 +18,9 @@ function TopPlans(){
 console.log(Tours)
 
 return (
-    <>
+    <div className="bg-black w-full bg-black">
       {isLoading ? (
+        <div className="flex justify-center pt-16 pb-10">
         <TailSpin
           height="80"
           width="80"
@@ -29,9 +30,42 @@ return (
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
+         
         />
+        </div>
       ) : (
-        <>
+      <>
+      <div className="flex justify-center p-4">      
+          <h1 className="text-white font-semibold text-3xl font-sans tracking-wide
+underline-offset-4
+">EXPLORE</h1>
+      </div>
+
+        <div className="flex  justify-around  pb-16 ">
+           {Tours.map((tour) => (
+
+      <div className="h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
+                    backgroundImage: `url(${require(`../../images/${tour.photo}`)})`,
+                  }}>
+          <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 hover:bg-orange-800" ><button className="text-white font-bold text-xl hover:text-black ">VIEW  </button> </div>
+       </div>
+                
+           ))}
+           
+        </div>
+        
+        </>
+      )}
+    </div>
+  );
+  
+}
+
+export {TopPlans}
+
+/* 
+
+ <>
           <div className="w-full flex justify-center mt-6">
             <div className="w-1/2 text-center text-2xl font-semibold">Explore</div>
           </div>
@@ -54,10 +88,5 @@ return (
             ))}
           </div>
         </>
-      )}
-    </>
-  );
-  
-}
 
-export {TopPlans}
+*/

@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TailSpin } from 'react-loader-spinner'
-
+import styled from 'styled-components';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 function Reeviews(){
-
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
     let [rev,setrev] = useState([])
 
     useEffect(() => {
@@ -19,92 +28,68 @@ function Reeviews(){
             console.error(error);
           });
       }
-      
-      
-      , []);
+   , []);
+
+      const Backg = styled.div`
+      background-color: #000000;
+opacity: 0.7;
+background-image:  linear-gradient(135deg, #ed7a00 25%, transparent 25%), linear-gradient(225deg, #ed7a00 25%, transparent 25%), linear-gradient(45deg, #ed7a00 25%, transparent 25%), linear-gradient(315deg, #ed7a00 25%, #000000 25%);
+background-position:  10px 0, 10px 0, 0 0, 0 0;
+background-size: 20px 20px;
+background-repeat: repeat;
+      `;
 
       return (
         <>
           {rev.length === 0 ? (
-            <TailSpin
-              height="80"
-              width="80"
-              color="#4fa94d"
-              ariaLabel="tail-spin-loading"
-              radius="1"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          ) : (
-            <>
-         <div className="py-6 text-center font-bold text-lg ">Reviews from our customers</div>
+           
+           <div className="flex justify-center pt-16 bg-black pb-10">
+           <TailSpin
+             height="80"
+             width="80"
+             color="#4fa94d"
+             ariaLabel="tail-spin-loading"
+             radius="1"
+             wrapperStyle={{}}
+             wrapperClass=""
+             visible={true}
+            
+           />
+           </div>
 
-            <div className='flex ml-48 mr-6 items-center mb-28'>
-              {Array.isArray(rev) ? (
-                rev.map((r) => (
-                    <blockquote className="m-6 rounded-lg bg-gray-100 p-8 ">
-                    <div className="flex items-center gap-4">
-                      <img
+          ) : (<>
+
+            <div className=' bg-black flex justify-center'>
+           
+
+              
+                <div className='h-80 bg-cover my-6 w-3/4 bg-white opacity-70 rounded-lg  '  >
+                <Slider {...settings} className='h-full '>
+     <div className='flex flex-col item-center'>
+      <div className='flex justify-center'>
+     <img
                         alt="Man"
                         src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                        className="h-16 w-16 rounded-full object-cover"
+                        className="h-16 w-16 rounded-full object-cover mb-4 mt-6"
                       />
-                      <div>
-                        <div className="flex justify-center gap-0.5 text-green-500">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </div>
-                        <p className="mt-1 text-lg font-medium text-gray-700">{r.user.name}</p>
                       </div>
-                    </div>
-                    <p className="line-clamp-2 sm:line-clamp-none mt-4 text-gray-500">
-                      {r.review}
-                    </p>
-                  </blockquote>
-                  
-                ))
-              ) : (
-                <div>No reviews available.</div>
-              )}
+      <div className='text-center  '>
+       The guides were knowledgeable, the accommodations were cozy. . The well-planned itinerary and expert guides made every moment enjoyable. If you're looking for an adventure that goes beyond the ordinary, this is the company to trust."
+      </div>
+      </div>
+      <div className='text-center'>
+       The guides were knowledgeable, the accommodations were cozy."
+      </div>
+      <div className='text-center'>
+       The guides were knowledgeable, the accommodations were cozy."
+      </div>
+      <div className='text-center'>
+       The guides were knowledgeable, the accommodations were cozy."
+      </div>
+    </Slider>
+
+                </div>
+             
               </div>
             </>
           )}
@@ -114,5 +99,6 @@ function Reeviews(){
       
 }
 
+//            <div className="py-6 text-center font-bold text-lg ">Reviews from our customers</div>
 
 export {Reeviews}

@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import axios from 'axios';
 
 const api_url = "http://localhost:5000/slots";
 
@@ -6,7 +7,6 @@ export async function getAllSlots(id){
 const res = await fetch(`${api_url}/${id}`)
 
 const {data} = await res.json();
-
 return data;
 }
 
@@ -51,6 +51,8 @@ console.error(error);
       }
 
 
+ 
+
 
 
 
@@ -62,10 +64,36 @@ export function mapdates(data){
     const formattedDate = x.toLocaleString();
     let dateData = formattedDate.split(',')
       if(hashMap.has(dateData[0]) === false){
-        hashMap.set(dateData[0], [{ time : dateData[1], id : data[i]._id }])
+        hashMap.set(dateData[0], [{ time : dateData[1], id : data[i]._id}])
       }else{
         hashMap.get(dateData[0]).push({ time : dateData[1], id : data[i]._id })
       }
 }
 return hashMap
+}
+
+
+export async function createBooking({id,no}){
+  console.log(id +" "+no)
+  let response = await axios.post(`http://localhost:5000/book/${id}`,
+ { no}  , {
+   headers: {
+     'Content-Type': 'application/json',
+   },
+})
+
+console.log(response)
+return response
+
+}
+
+
+
+
+
+export async function getUserBookings(){
+  console.log('hiiiii')
+  const res = await axios.get("http://localhost:5000/book/getReservations");
+console.log(res);
+return res.data.data;
 }

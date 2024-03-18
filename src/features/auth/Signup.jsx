@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import { signup } from '../../services/authApi'; 
-
+import { useErrorBoundary } from "react-error-boundary";
 
 const SignupForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+ const { showBoundary } = useErrorBoundary()
   async function handleSubmit  (e)  {
+
+try{
+    throw new Error('noo');
+}catch(err){
+  showBoundary(err);
+}
     e.preventDefault();
     // Perform signup logic here
     console.log('Name:', name);

@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTours } from "../../services/apiTours";
+import { getTours} from "../../services/apiTours";
 import { TailSpin } from "react-loader-spinner";
 import { TourTableRow } from "./TourTableRow";
-
-
+import { LineChart } from "./LineChart";
+import { PieChart } from "./PieChart";
 
 function AdminToursTable({modelState,setCurrDetails,setCurrSlot}){
 
-  const {isLoading,data: Tours, error,} = useQuery({
+  const {isLoading,data, error,} = useQuery({
     queryKey: ["Tours"],
     queryFn: getTours,
   });
@@ -15,7 +15,7 @@ function AdminToursTable({modelState,setCurrDetails,setCurrSlot}){
 
 
 if(!isLoading){
-  console.log(Tours)
+  console.log(data)
 }
 
 
@@ -38,8 +38,17 @@ function handleOnAdd(tour){
       visible={true}
     />
     ) :
-
-          <div className="flex-grow flex-col">
+          
+          <div className="flex-grow flex-row box-border bg-">
+            <div className="grid grid-cols-5 box-border">
+              <div className="col-span-3 flex justify-center items-center box-border">
+              <LineChart/>
+              </div>
+              <div className="col-span-2 box-border my-10 px-16">
+              <PieChart/>
+              </div>
+            </div>
+            
             <div className="flex w-100 justify-center			">
           <div className="w-7/12 ">
   <div className="font-semibold	text-2xl m-6">Product</div>
@@ -56,7 +65,7 @@ function handleOnAdd(tour){
 
     </tbody>
     <tbody>
-    {  Tours.map((tour)=>(
+    {  data.map((tour)=>(
       <tr >
     <td className="border border-slate-700 flex"  >
       <div style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})` }}
@@ -64,7 +73,7 @@ function handleOnAdd(tour){
     <div className="flex flex-col justify-center pl-3">
       {tour.name} </div></td>
     <td className="border border-slate-700 ">{tour.price}</td>
-    <td className="border border-slate-700 ">{tour.manager.name}</td>
+    <td className="border border-slate-700 "></td>
     <td className="border border-slate-700 ">
      <div className="flex ml-7	gap-x-9">
       

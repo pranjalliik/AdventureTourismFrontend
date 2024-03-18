@@ -38,7 +38,6 @@ function Viewtour(){
 
        if(info){console.log(info.data)}
   
-      console.log(error)
     if(info === 'Request failed with status code 401'){
      
     }
@@ -67,9 +66,9 @@ function Viewtour(){
          <TBanner TourInfo = {info.data}
               modelState = {modelState}
 ></TBanner>
-            <Map ></Map>
+      <Reviews/>   
         </div>
-
+      
     )
 }
 

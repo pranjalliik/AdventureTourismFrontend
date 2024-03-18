@@ -19,7 +19,11 @@ import { UserInfo } from "./features/user/UserInfo";
 import { UserBookings } from "./features/user/UserBookings";
 import { Profile } from "./features/user/Profile";
 import { ChagePass } from "./features/user/ChangePass";
-
+import { Success } from "./ui/Success";
+import {ErrorBoundary} from 'react-error-boundary';
+import { Error } from "./utils/Error";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
+import { RestrictAccess } from "./features/auth/RestrictAccess";
 axios.defaults.withCredentials = true;
 
 
@@ -37,8 +41,14 @@ console.log(role)
               },
             });
 
+           const errorHandler = (error,errorInfo)=>{
+            console.log("Loging ",error, errorInfo)
+           } 
+
  return(
      <>
+           <ErrorBoundary FallbackComponent={Error} onError={errorHandler}>
+
      <QueryClientProvider client={queryClient}>
      <ReactQueryDevtools initialIsOpen={false} />
 
@@ -68,13 +78,11 @@ console.log(role)
 
 
      <Route path="cart" element={
-            <>
-            <Cart></Cart>
-           </>
+           <Cart></Cart>
            }/>
      
 
-
+    <Route path="/success" element={<Success/>}/>
      
      <Route path="/tours" element={
             <>
@@ -92,19 +100,22 @@ console.log(role)
            }>
 
             </Route>
-
+            
             <Route path="/book/:id" element={
-            <>
+          
+             <ProtectedRoute>
            <BookingLayout/>   
-           </>
+           </ProtectedRoute>
+
+           
            }/>
 
 
            
             <Route path="/signin" element={
-                 <>
+               <RestrictAccess>
                  <Signin></Signin>
-                 </>
+                 </RestrictAccess>
            }/>
 
            <Route path="/add" element={
@@ -132,6 +143,8 @@ console.log(role)
 
             </BrowserRouter>
             </QueryClientProvider>
+            </ErrorBoundary>
+
      </>
  )
 }

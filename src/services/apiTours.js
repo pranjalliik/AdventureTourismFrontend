@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import axios from 'axios'
 
 const api_url = "http://localhost:5000/tours";
 
@@ -14,6 +15,7 @@ return data;
 export async function getTour(id){
     try{
     const res = await fetch(`${api_url}/${id}`)
+
     if (res.status === 401) {
         // Handle 401 Unauthorized error
         console.log("not show")
@@ -34,7 +36,6 @@ catch(err){
 
 export async function getthreeTours(){
     const res = await fetch(`${api_url}/topthree`)
-    
     const {data} = await res.json();
     
     return data;
@@ -57,4 +58,12 @@ export async function getthreeTours(){
         console.log("hii")
       console.error(error);
     });
+    }
+
+
+    export async function getAdminTours(){
+      console.log('hiiiii')
+      const res = await axios.get("http://localhost:5000/tours/admin");
+    console.log(res);
+    return res.data.data;
     }

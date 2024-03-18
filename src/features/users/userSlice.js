@@ -29,6 +29,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   username: '',
   role: '',
+  email: '',
 };
 
 const userSlice = createSlice({
@@ -40,10 +41,13 @@ const userSlice = createSlice({
     },
     updateRole(state, action) {
       state.role = action.payload;
+    },  
+    updateEmail(state, action) {
+      state.email = action.payload;
     },
   },
 });
 
-export const { updateName, updateRole } = userSlice.actions;
+export const { updateName, updateRole,updateEmail } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -11,7 +11,7 @@ function TourInfo(){
         isLoading,data : info,error,status
       } = useQuery({
         queryKey: ["Tour"],
-        queryFn: async function getTour(id){
+        queryFn: async function getTour(id){                                        
             try{
             const res = await  axios.get(`http://localhost:5000/tours/${parm.id}`) 
                      return res;

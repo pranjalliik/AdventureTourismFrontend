@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTours } from "../../../services/apiTours";
+import { getAdminTours } from "../../../services/apiTours";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 function SetTourHomeLayoutContent(){
 
     const {isLoading,data: Tours, error,} = useQuery({
         queryKey: ["Tours"],
-        queryFn: getTours,
+        queryFn: getAdminTours,
       });
      
     

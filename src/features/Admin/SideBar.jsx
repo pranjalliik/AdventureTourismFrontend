@@ -10,7 +10,7 @@ function SideBar(){
         <>
         {
             !isExpanded &&
-            <div className="h-screen bg-orange-900 px-2 pt-2  text-white">
+            <div className="h-screen bg-orange-900 px-2 pt-2  text-white pt-4">
             <span class="material-symbols-outlined" onClick={() => setIsExpanded(!isExpanded)}>
              menu
               </span>
@@ -19,16 +19,16 @@ function SideBar(){
               {
                 
                     isExpanded &&
-                    <div class="w-2/12 h-screen bg-orange-900">
+                    <div class="w-2/12 h-screen bg-orange-900 pt-4 box-border pl-4 ">
           <span class="material-symbols-outlined text-white  " onClick={() => setIsExpanded(!isExpanded)}>
              menu
 
               </span>
 
-              <div className="flex flex-col pl-6 text-white space-y-4">
-              <Link to='/tours' >Menu</Link>
-              <Link to='/add'  onClick={() => setIsExpanded(!isExpanded)}>Add</Link>
-              <Link to='/users'>Users</Link>
+              <div className="flex flex-col pl-6 text-white space-y-4 pt-4" >
+              <Link to='/tours' className="hover:text-black">Menu</Link>
+              <Link to='/add' className="hover:text-black"  onClick={() => setIsExpanded(!isExpanded)}>Add</Link>
+              <Link to='/users' className="hover:text-black" >Users</Link>
               </div>
         </div>
         }

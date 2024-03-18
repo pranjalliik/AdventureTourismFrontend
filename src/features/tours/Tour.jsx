@@ -8,22 +8,44 @@ import { ModalBooking } from "../../utils/modalBooking";
 import { addItem } from "../cart/cartSlice";
 import { useQuery } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
+import StarRatings from 'react-star-ratings';
+import { useSearchParams } from "react-router-dom";
+import { FilterAndSort } from "./FilterAndSort";
 
 
  function Tour(){
   const role = useSelector((state)=> state.user.role)
+  const[searchParams,setSearchParams] = useSearchParams();
+
+  let priceorder = searchParams.get('order');
+  let ratingFilter = searchParams.get('rating');
 
 
+  const uniqueParamNames = [...searchParams.keys()];
+  const numberOfUniqueParams = uniqueParamNames.length;
+ 
+if(numberOfUniqueParams !== 0){
+
+  for (const [name, value] of searchParams) {
+     if(name === 'price'){
+         priceorder = value;
+     }else if(name === 'rating'){
+      ratingFilter = value;
+     }
+  }
+}
+
+
+
+
+
+
+
+
+ 
   const dispatch = useDispatch()
+let navigate = useNavigate();
 
-   const [noOfPeople,setNoOfPeople] = useState(0);
-  const [openModal,setOpenModal] = useState(false)
-    const [toursData, setTour] = useState([]);
-    const username = useSelector((state)=> state.user.username)
-
-        
-
-   let navigate = useNavigate();
 function handleView(tour){
   let id = tour._id
   navigate(`/tours/${id}`);
@@ -32,7 +54,7 @@ function handleView(tour){
 
 function handleAddToCart(tour){
 
- 
+
     const newItem = {
       id : tour._id,
       name: tour.name,
@@ -54,11 +76,35 @@ function handleAddToCart(tour){
 
 
 
+  const filteredData =function(Tours){
 
+
+    let arr = [...Tours]; // Create a shallow copy of Tours
+
+    if(priceorder ){
+   if(priceorder === 'highToLow'){
+    arr.sort((a,b)=> b.price - a.price)
+   }   if(priceorder === 'lowToHigh'){
+    arr.sort((a,b)=> a.price - b.price)
+   }
+  }
+ 
+  if(ratingFilter){
+    let res = arr.filter((tour)=>tour.ratingAverage == ratingFilter)
+    return res
+  }
+
+  return arr
+  //let sort =  filterQuery.search === ''? Tours :Tours.filter(item =>
+   // item.name.toLowerCase().includes(filterQuery.search.toLowerCase())
+ // )
+
+};
     return(
         <>
        {
       isLoading ? (
+        <div className="flex justify-center pt-16 pb-10">
       <TailSpin
       height="80"
       width="80"
@@ -69,46 +115,52 @@ function handleAddToCart(tour){
       wrapperClass=""
       visible={true}
     />
-    ) :
+    </div>
+          ) :
 
       
     <>
-    <div className="m-9 ">
-            <div className="flex bg-stone-300 h-10 p-2 rounded-2xl mt-4 mr-4 w-48">
-                <span class="material-symbols-outlined ">
-                     search
-                </span>
-                <div className="">
-                    <input className="w-36 outline-none  rounded-lg"/>
-                </div>
-            </div>
+ 
 
-            </div>
-    <div className="">       
-    <div className="grid grid-cols-1 m-9 border bg-gray-200 rounded-md">
+    <div className="grid grid-cols-5	items-start	pt-12 ">   
+    <div className="sticky  top-0 pt-6 p-6 flex flex-col gap-y-4" > 
+            <FilterAndSort/>
+            </div>    
+    <div className=" mx-12 border bg-gray-200 rounded-md col-span-4">
       
-    {Tours.map((tour) => (
-      <div className="grid-cols-4 grid mx-12 my-7 p-3 rounded-md bg-white">
+    {filteredData(Tours).map((tour) => (
+      <div className=" mx-12 my-7 p-3 rounded-md bg-white flex ">
         <div
           
-          style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})` }} className="rounded-lg  h-40 "
+          style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})` }} className="rounded-lg  h-44 w-2/5 bg-no-repeat	bg-cover	 "
           alt=""
         />
-  <div className="col-span-1 flex flex-col font-medium">
-    <h1 className="ml-5 mt-3 font-bold text-lg">{tour.name}</h1>
-    <div className="ml-5">4/5</div>
-    <div className="ml-5">Duration:{tour.duration}</div>
-    <div className="ml-5"> {tour.Location} </div>
+        <div className="flex flex-col ml-12">
+  <div className=" flex flex-col font-medium mt-3">
+
+    <h1 className="  font-bold text-lg">{tour.name}</h1>
+    <StarRatings 
+          rating={tour.ratingAverage}
+          starDimension="20px"
+        starSpacing="2px"
+        starRatedColor="rgb(230, 67, 47)"
+          numberOfStars={5}
+          name='rating'
+        />
+        
+    
+    <div className="mt-2"> {tour.Location} </div>
+    <div className=""> {tour.price} </div>
   </div>
-        <div className="col-span- flex  justify-center justify-evenly gap-14">
+        <div className="flex mt-4  gap-x-12  ">
           <div>
-          <button className="bg-black mt-20 text-white px-4 py-2 rounded-md	hover:bg-neutral-800" onClick={()=>{handleView(tour)}}>View</button>
+          <button className="bg-black  text-white  rounded-md	hover:bg-neutral-800 py-2 px-4" onClick={()=>{handleView(tour)}}>View</button>
           </div>
           <div>
-          <button  className="bg-black mt-20 text-white p-3 rounded-lg hover:bg-neutral-800"  onClick={()=>{handleAddToCart(tour)}}>Add to Bookings</button>
+          <button  className="bg-black text-white rounded-lg hover:bg-neutral-800  py-2 px-4"  onClick={()=>{handleAddToCart(tour)}}>Add to Bookings</button>
            </div>
         </div>
-
+        </div>
       </div>
       
    
