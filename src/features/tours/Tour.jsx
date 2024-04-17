@@ -19,7 +19,7 @@ import { FilterAndSort } from "./FilterAndSort";
 
   let priceorder = searchParams.get('order');
   let ratingFilter = searchParams.get('rating');
-
+  let searchquery = searchParams.get ('search_query');
 
   const uniqueParamNames = [...searchParams.keys()];
   const numberOfUniqueParams = uniqueParamNames.length;
@@ -31,6 +31,8 @@ if(numberOfUniqueParams !== 0){
          priceorder = value;
      }else if(name === 'rating'){
       ratingFilter = value;
+     }else if(name === 'search_query'){
+      searchquery = value
      }
   }
 }
@@ -57,13 +59,7 @@ function handleAddToCart(tour){
 
     const newItem = {
       id : tour._id,
-      name: tour.name,
-      
-     // quantity : noOfPeople,
-      unitPrice : tour.price,
-      photo : tour.photo
-      //totalPrice : tourBooked.price * noOfPeople,
-      
+      name: tour.name,      
      }
      dispatch(addItem(newItem))
 }
@@ -90,9 +86,13 @@ function handleAddToCart(tour){
   }
  
   if(ratingFilter){
-    let res = arr.filter((tour)=>tour.ratingAverage == ratingFilter)
-    return res
+    
+    arr = arr.filter((tour)=>tour.ratingAverage == ratingFilter)
+   
   }
+if(searchquery){
+  arr = arr.filter((tour)=>tour.name.toLowerCase() === searchquery.toLowerCase())
+}  
 
   return arr
   //let sort =  filterQuery.search === ''? Tours :Tours.filter(item =>

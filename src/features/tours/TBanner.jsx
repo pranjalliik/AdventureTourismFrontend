@@ -45,7 +45,7 @@ let length = 350;
       <div className='mt-2'>{TourInfo.data.Location}📍<div/>
       <div className='mt-2'>
       <StarRatings 
-          rating={3}
+          rating={TourInfo.data.ratingAverage}
           starDimension="15px"
         starSpacing="2px"
         starRatedColor="rgb(230, 67, 47)"

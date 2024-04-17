@@ -2,23 +2,34 @@ import { useQuery } from "@tanstack/react-query";
 import { getAdminTours } from "../../../services/apiTours";
 import { TailSpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import { getTours } from "./../../../services/apiTours"
+import {useState,useEffect} from 'react'
+import axios from 'axios'
 function SetTourHomeLayoutContent(){
 
-    const {isLoading,data: Tours, error,} = useQuery({
-        queryKey: ["Tours"],
-        queryFn: getAdminTours,
-      });
-     
+  const[Tours,setTours] = useState([])
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/tours');
+            console.log(res);
+            setTours(res.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            // Handle error, if needed
+        }
+    };
+
+    fetchData();
+}, []);
     
-    
-    if(!isLoading){
-      console.log(Tours)
-    }
+
 
     return(
        
         <div className="grid-rows-2 h-screen  w-full">
-            <div className="h-20 flex justify-end bg-stone-100 mb-8">
+            <div className="h-12 flex justify-end mb-8 bg-gray-700"  style={{backgroundColor : "#151518"}}>
                 <div className="flex bg-stone-300 h-10 p-2 rounded-2xl mt-4 mr-4">
                 <span class="material-symbols-outlined ">
                      search
@@ -29,7 +40,7 @@ function SetTourHomeLayoutContent(){
             </div>
             </div>
             
-         {   isLoading ? (
+         {   Tours.length === 0 ? (
       <TailSpin
       height="80"
       width="80"
@@ -44,7 +55,7 @@ function SetTourHomeLayoutContent(){
     
     <div className="grid grid-cols-2 p-6 box-border ">
          {  Tours.map((tour)=>(
-      <div className="col-span-1 flex bg-stone-100 m-2 p-2 gap-x-20	items-center">
+      <div className="col-span-1 flex bg-gray-300 m-2 p-2 gap-x-20	items-center rounded-lg">
         <div style={{ backgroundImage: `url(${require(`../../../images/${tour.photo}`)})` }}
       alt="" className="h-24 w-32 bg-contain bg-no-repeat mt-2 ml-2"></div>
       <div className="w-20">{tour.name}</div>
@@ -63,3 +74,5 @@ function SetTourHomeLayoutContent(){
 }
 
 export {SetTourHomeLayoutContent}
+
+

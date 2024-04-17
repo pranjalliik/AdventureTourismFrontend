@@ -16,7 +16,7 @@ function loadScript(src) {
 }
 
 
-function Payment({lawyerId}){
+function Payment({tourId}){
 
     async function displayRazorpay() {
 		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -27,7 +27,7 @@ function Payment({lawyerId}){
 		}
 
 		const data =  await axios.post(
-            `http://localhost:80/lawyer/book/${lawyerId}`,
+            `http://localhost:5000/book/${tourId}`,
             
             {
               headers: { 'Content-Type': 'application/json' },
@@ -40,8 +40,8 @@ function Payment({lawyerId}){
 		console.log(data)
 
 		const options = {
-			key:  'rzp_test_UAy5YhX3stv6XA' ,
-			currency: data.currency,
+			key:  'rzp_test_oeAvpf9MwJ4OX9' ,
+			currency: 'INR',
 			amount: data.amount.toString(),
 			order_id: data.id,
 			name: 'Donation',

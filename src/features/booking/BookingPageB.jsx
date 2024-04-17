@@ -1,10 +1,12 @@
 import {Modelt} from "../../ui/Modelt"
 import { useState } from "react"
+import { TailSpin } from 'react-loader-spinner'
+import { useParams } from "react-router-dom";
 
-function BookingPageB({  children ,setSlot}){
+function BookingPageB({ data, children ,setSlot}){
 
     const [modelOpen,setModel] = useState(false)
-
+    let parm = useParams()
 function modelState(){
   setModel(!modelOpen)
 }
@@ -14,23 +16,43 @@ function handleClick(slot){
   setSlot(slot)
 }
 
+function displayDate(x){
+  const formattedDate = x.toLocaleString();
+  let dateData = formattedDate.split('T18:30:00.000Z')
+  console.log(formattedDate)
+  return dateData[0];
+}
+
+
 
     return(
-<div className="ml-20 mt-10 p-6  box-border mr-6 bg-gray-100 rounded-lg mb-10">
+<div className="ml-20 mt-10 p-6  box-border mr-6 bg-gray-100 rounded-lg mb-10 flex "   style={{boxShadow : "2px 2px  15px 2px  gray  "}}>
 
 
        
-        <div className="bg-white my-4">
-        <div className="text-lg	font-semibold ml-1 p-1">gfjnlkm;</div>
-        <div className="flex gap-x-6 ">
-      
-           <div className=" ml-1 mb-2 p-2 hover:bg-black hover:text-white rounded-md"  onClick={()=>handleClick()}>
-           key
-           </div>   
+{
+           data.length === 0? (
+      <TailSpin
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="tail-spin-loading"
+      radius="1"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
+    ) :
+    data.map((slot) => (
         
-        </div>
+        <div className=" p-2 bg-black font-semibold  hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot)}  >{displayDate(slot.date)}</div>
+
         
-        </div>
+     
+      ))  
+  }
+        
+        
 
      {modelOpen &&
           <Modelt 

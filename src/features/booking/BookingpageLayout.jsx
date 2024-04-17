@@ -48,7 +48,6 @@ function BookingLayout(){
  }
 
       if(data){
-        console.log(data)
        hashMap = mapdates(data)
        
         let map = hashMap[0]
@@ -59,9 +58,8 @@ function BookingLayout(){
 
 return(
     <>
-    <div className="w-full h-36 bg-ptn"></div>
-    <div className="border-black w-full h-8 bg-orange-600"></div>
-       
+     <div className=" pb-10" >
+      
        {
         loading ? (
             <TailSpin
@@ -85,7 +83,7 @@ return(
              <NoOfPeople selectedSlot={selectedSlot}></NoOfPeople>
          </BookingPage>
           : 
-            <BookingPageB   setSlot = {setSlot}>
+            <BookingPageB  data={data} setSlot = {setSlot}>
                 <NoOfPeople selectedSlot={selectedSlot}></NoOfPeople>
             </BookingPageB>
 
@@ -93,6 +91,7 @@ return(
         
         </>
        }
+       </div>
     </>
 )
 }

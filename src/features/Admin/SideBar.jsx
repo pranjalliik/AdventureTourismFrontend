@@ -10,7 +10,7 @@ function SideBar(){
         <>
         {
             !isExpanded &&
-            <div className="h-screen bg-orange-900 px-2 pt-2  text-white pt-4">
+            <div className="h-screen bg-orange-600 px-2 pt-2  text-white pt-4" style={{backgroundColor : "#302e39"}}>
             <span class="material-symbols-outlined" onClick={() => setIsExpanded(!isExpanded)}>
              menu
               </span>
@@ -19,7 +19,7 @@ function SideBar(){
               {
                 
                     isExpanded &&
-                    <div class="w-2/12 h-screen bg-orange-900 pt-4 box-border pl-4 ">
+                    <div class="w-2/12 h-screen bg-orange-600 pt-4 box-border pl-4 " style={{backgroundColor : "#302e39"}}>
           <span class="material-symbols-outlined text-white  " onClick={() => setIsExpanded(!isExpanded)}>
              menu
 

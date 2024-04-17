@@ -2,21 +2,31 @@ import { useQuery } from "@tanstack/react-query";
 import { getTours} from "../../services/apiTours";
 import { TailSpin } from "react-loader-spinner";
 import { TourTableRow } from "./TourTableRow";
-import { LineChart } from "./LineChart";
-import { PieChart } from "./PieChart";
+import { Chart } from "./Chart";
+import{useState,useEffect} from 'react';
+import axios from 'axios'
 
 function AdminToursTable({modelState,setCurrDetails,setCurrSlot}){
 
-  const {isLoading,data, error,} = useQuery({
-    queryKey: ["Tours"],
-    queryFn: getTours,
-  });
+  const[data,setData] = useState([])
  
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const res = await axios.get('http://localhost:5000/tours');
+            console.log(res);
+            setData(res.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            // Handle error, if needed
+        }
+    };
+
+    fetchData();
+}, []);
 
 
-if(!isLoading){
-  console.log(data)
-}
+
 
 
 function handleOnAdd(tour){
@@ -25,8 +35,10 @@ function handleOnAdd(tour){
 
     return(
         <>
+    <div className="flex-grow flex-row box-border border-white ml-20">
+       <Chart/>
            {
-      isLoading ? (
+      data.length === 0 ? (
       <TailSpin
       height="80"
       width="80"
@@ -39,27 +51,19 @@ function handleOnAdd(tour){
     />
     ) :
           
-          <div className="flex-grow flex-row box-border bg-">
-            <div className="grid grid-cols-5 box-border">
-              <div className="col-span-3 flex justify-center items-center box-border">
-              <LineChart/>
-              </div>
-              <div className="col-span-2 box-border my-10 px-16">
-              <PieChart/>
-              </div>
-            </div>
+
+           
             
-            <div className="flex w-100 justify-center			">
-          <div className="w-7/12 ">
-  <div className="font-semibold	text-2xl m-6">Product</div>
+            <div className="flex w-full 		">
+          <div className="w-1/2 ">
+  <div className="font-semibold	text-2xl m-6">Tours</div>
   <table className="border-collapse border border-slate-500 w-full mb-12 ">
     <tbody>
  
       <tr>
-        <th className="border border-slate-600 w-5/12">Name</th>
-        <th className="border border-slate-600 w-1/6">Price</th>
-        <th className="border border-slate-600 w-1/6">Discount</th>
-        <th className="border border-slate-600 ">edit/del</th>
+        <th className="border border-slate-600 w-1/2 ">Name</th>
+        <th className="border border-slate-600 ">Price</th>
+        <th className="border border-slate-600 ">Edit</th>
       </tr>
     
 
@@ -68,14 +72,13 @@ function handleOnAdd(tour){
     {  data.map((tour)=>(
       <tr >
     <td className="border border-slate-700 flex"  >
-      <div style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})` }}
+      <div style={{ backgroundImage: `url(${require(`./../../images/${tour.photo}`)})` }}
       alt="" className="h-24 w-32 bg-contain bg-no-repeat mt-2 ml-2"></div>
     <div className="flex flex-col justify-center pl-3">
       {tour.name} </div></td>
-    <td className="border border-slate-700 ">{tour.price}</td>
-    <td className="border border-slate-700 "></td>
+    <td className="border border-slate-700 text-center">Rs{` ${tour.price}`}</td>
     <td className="border border-slate-700 ">
-     <div className="flex ml-7	gap-x-9">
+     <div className="flex justify-center gap-x-9">
       
       <div onClick={() =>{modelState()
       setCurrDetails(tour)
@@ -90,23 +93,19 @@ function handleOnAdd(tour){
 
 
 
-                     <span class="material-symbols-outlined">
+      
 
-                    delete
-                      </span>
-
-                      <span class="material-symbols-outlined" onClick={()=>{setCurrSlot(tour) 
-                         modelState()}}>add</span>
+                     
                     </div> </td>
                    </tr>
       ))}
     </tbody>
   </table>
   </div>
-  </div>
-</div>
-}
+            </div>
 
+}
+</div>
 
         </>
     )

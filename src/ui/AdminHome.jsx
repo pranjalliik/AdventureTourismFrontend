@@ -41,13 +41,17 @@ const [addSlotTour,setAddSlotTour] = useState()
         <>
         
         <div className="flex min-h-screen " style={isUpdateModelOpen? {
-      zIndex: 1,
-      filter: "blur(8px)",
-      WebkitFilter: "blur(1px)",
-    } : {}}>
+           backgroundColor : "#151518",
+      zIndex: 12,
+     
+     
+    } : { backgroundColor : "#151518",
+        color : "#FFFFFF"
+
+    } }>
           <SideBar></SideBar>
         <AdminToursTable
-        
+        style={{backgroundColor : "#121212"}}
         modelState = {modelState}
         setCurrDetails = {setDetails}
         setCurrSlot  ={SetSlot}
@@ -60,6 +64,7 @@ const [addSlotTour,setAddSlotTour] = useState()
         Price = {currDetails.Price}
         Discount = {currDetails.Discount}
         id = {currDetails.id}
+        photo = {currDetails.Image}
         />
         </Model> 
         }   

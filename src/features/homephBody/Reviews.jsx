@@ -8,12 +8,24 @@ import Slider from "react-slick";
 
 function Reeviews(){
   let settings = {
+
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 3,
+    slidesToScroll: 1,
+
   };
+
+  const StyledSlider = styled(Slider)`
+  .slick-slide {
+    margin: 0 10px;
+  }
+  .slick-list {
+    margin: 0 -10px;
+  }
+`;
+
     let [rev,setrev] = useState([])
 
     useEffect(() => {
@@ -58,14 +70,18 @@ background-repeat: repeat;
            </div>
 
           ) : (<>
-
+     
+     <div className="flex justify-center p-4 bg-black pt-6">      
+          <h1 className=" text-white font-semibold text-3xl font-sans tracking-wide
+     underline-offset-4 pt-12 pb-8" style={{fontFamily: "Times New Roman"}}>REVIEWS</h1>
+      </div>
             <div className=' bg-black flex justify-center'>
            
 
               
-                <div className='h-80 bg-cover my-6 w-3/4 bg-white opacity-70 rounded-lg  '  >
-                <Slider {...settings} className='h-full '>
-     <div className='flex flex-col item-center'>
+                <div className='h-80  my-6 w-3/4    opacity-70 rounded-lg  '  >
+                <StyledSlider {...settings} className='h-full   '>
+     <div className='flex flex-col h-72 w-52 bg-white rounded-lg mr-2'>
       <div className='flex justify-center'>
      <img
                         alt="Man"
@@ -74,19 +90,54 @@ background-repeat: repeat;
                       />
                       </div>
       <div className='text-center  '>
-       The guides were knowledgeable, the accommodations were cozy. . The well-planned itinerary and expert guides made every moment enjoyable. If you're looking for an adventure that goes beyond the ordinary, this is the company to trust."
+      The guides are knowledgeable, the destinations are breathtaking, and the activities are diverse. Whether you're a thrill-seeker or a nature enthusiast, this is the ultimate platform to fuel your wanderlust.
+        <div className='mt-2 '>-Sarah Johnson</div>
       </div>
       </div>
-      <div className='text-center'>
-       The guides were knowledgeable, the accommodations were cozy."
+
+      <div className='flex flex-col h-72 w-52 bg-white rounded-lg mr-2'>
+      <div className='flex justify-center'>
+     <img
+                        alt="Man"
+                        src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                        className="h-16 w-16 rounded-full object-cover mb-4 mt-6"
+                      />
+                      </div>
+      <div className='text-center  '>
+      From heart-pounding treks to serene kayaking trips, every journey has been expertly crafted for maximum excitement and safety. If you're looking for unforgettable adventures, look no further!
+      <div className='mt-2 '>-Bryan </div>
+
       </div>
-      <div className='text-center'>
-       The guides were knowledgeable, the accommodations were cozy."
       </div>
-      <div className='text-center'>
-       The guides were knowledgeable, the accommodations were cozy."
+      <div className='flex flex-col h-72 w-52 bg-white rounded-lg mr-2'>
+      <div className='flex justify-center'>
+     <img
+                        alt="Man"
+                        src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                        className="h-16 w-16 rounded-full object-cover mb-4 mt-6"
+                      />
+                      </div>
+      <div className='text-center  '>
+      Every moment was filled with excitement and wonder. The attention to detail and personalized experiences made our trip truly unforgettable. Can't wait to book another adventure soon!
+      <div className='mt-2 '>-Jake Smith</div>
+</div>
       </div>
-    </Slider>
+
+      <div className='flex flex-col h-72 w-52 bg-white rounded-lg mr-2'>
+      <div className='flex justify-center'>
+     <img
+                        alt="Man"
+                        src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                        className="h-16 w-16 rounded-full object-cover mb-4 mt-6"
+                      />
+                      </div>
+      <div className='text-center  '>
+      I've conquered towering peaks, navigated wild rivers, and dived into crystal-clear waters, all thanks to the seamless booking process and top-notch guides provided here.
+      <div className='mt-2 '>-Alex Thompson</div>
+</div>
+      </div>
+     
+    </StyledSlider>
 
                 </div>
              

@@ -3,13 +3,13 @@ import { useMutation } from "@tanstack/react-query";
 import { createShow } from "../../../services/apiBook";
 import { useParams } from "react-router-dom";
 
-function Sform(){
+
+function SformB(){
 
     const [year,setYear] = useState('')
     const [month,setMonth] = useState('')
     const [day,setDay] = useState('')
-    const [hours,setHours] = useState('')
-    const [min,setMin] = useState('')
+    const [capacity,setCapacity] = useState('')
 
     const mutation = useMutation(createShow);
     let parm = useParams()
@@ -27,19 +27,17 @@ function handleChange(event){
         case "day":
           setDay(value);
           break;
-        case "hours":
-          setHours(value);
+         default:
+          setCapacity(value);
           break;
-        default:
-          setMin(value);
-          break;
+        
       }
 }
 
 function handleSubmit(event){
     event.preventDefault();
 
-    if(year === '' || month === '' || day === '' || hours === '' || min === ''){
+    if(year === '' || month === '' || day === '' || capacity === ''){
         alert('empty')
       return;
     }
@@ -52,9 +50,8 @@ function handleSubmit(event){
         year: year,
         month: month -1 ,
         day: day,
-        hours: hours,
-        min: min,
-        capacity : 25
+        capacity : capacity,
+        seheduleType : 'dayWise'
       };
 console.log(data);
 console.log(parm.id)
@@ -105,11 +102,11 @@ if(mutation.isError){
             </div>
 
             <div  className="flex flex-col gap-y-2">
-             <label className="text-xl font-semibold	">Time</label>
-             <div className="flex gap-x-4">
-             <input type="number" placeholder="hour" name="hours" value={hours}  onChange={handleChange} className="w-44 h-8 p-2"></input>
-            <input type="number" placeholder="min" name="min" value={min} onChange={handleChange} className="w-44 h-8 p-2"></input>
-            </div>
+             <label className="text-xl font-semibold	">Capacity</label>
+            
+             <input type="number" name="capacity" value={capacity}  onChange={handleChange} className="w-44 h-8 p-2"></input>
+           
+            
             </div>
             <button onClick={handleSubmit} className="bg-orange-600 p-4 rounded-lg text-white font-bold text-xl py-2 h-11">Create</button>
             </form>
@@ -117,4 +114,5 @@ if(mutation.isError){
     )
 }
 
-export {Sform}
+
+export {SformB}

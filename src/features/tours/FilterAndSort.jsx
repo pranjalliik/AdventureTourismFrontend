@@ -7,10 +7,13 @@ function FilterAndSort(){
 
 
     const[searchParams,setSearchParams] = useSearchParams();
+    const[squery,setSquery] = useState()
      let priceorder = searchParams.get('price');
     
     let ratingFilter = searchParams.get('rating');
-
+    let searchquery =   searchParams.get ('search_query');
+    
+    
     const handleSortChange = (event) => {
         const newSortOrder = event.target.value;
         console.log(newSortOrder, priceorder)
@@ -44,14 +47,38 @@ function FilterAndSort(){
             }
       }
 
+   function handleChange(event){
+let {value} = event.target 
+console.log(value)
+   setSquery(value)
+   }
+
+   const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Call your function here
+        if(searchquery === '' && (!squery || squery.trim() === ''))return;
+      console.log(squery)
+        if(!squery || squery.trim() === ''){
+          searchquery = '';
+          searchParams.delete('search_query');
+          setSearchParams(searchParams);
+          return;
+        }
+
+              searchParams.set('search_query',squery );
+              setSearchParams(searchParams);
+              searchquery = squery
+      console.log('Enter key pressed');
+    }
+  }
     return(
         <>
          <div className="flex bg-gray-200 w-min	rounded-lg ">
-                <span class="material-symbols-outlined my-2 mx-1">
+                <span class="material-symbols-outlined py-2 px-1  hover:opacity-50 "  >
                      search
                 </span>
                
-                    <input className="p-2 outline-none  h-6 my-2 mx-2"/>
+                    <input className="p-2 outline-none  h-6 my-2 mx-2" onKeyDown={handleKeyPress}  name="search" value={squery}  onChange={handleChange} />
                 
             </div>
          <div>Price</div>

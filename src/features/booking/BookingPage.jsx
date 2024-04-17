@@ -7,7 +7,7 @@ import {Modelt} from "../../ui/Modelt"
 import { useState } from "react";
 import { mapdates } from "../../services/apiBook";
 import { set } from "mongoose";
-import { Schedule } from "../Admin/TimeAndDate/schedule";
+import { Schedule } from "../Admin/TimeAndDate/ScheduleA";
 
 function BookingPage({ hashMap, children ,setSlot}){
 
@@ -25,8 +25,8 @@ function handleClick(slot){
 }
     
     return(
-        <>
- <div className="ml-20 mt-10 p-6  box-border mr-6 bg-gray-100 rounded-lg mb-10">
+        
+ <div className="ml-20 mt-10 p-6 bg-gray-300 box-border mr-6 rounded-lg shadow-lg" style={{boxShadow : "2px 2px  15px 2px  gray  "}}  >
         {
             hashMap.size === 0? (
       <TailSpin
@@ -42,11 +42,11 @@ function handleClick(slot){
     ) :
 
         Array.from(hashMap.entries()).map(([key, value]) => (
-        <div className="bg-white my-4">
-        <div className="text-lg	font-semibold ml-1 p-1">{key}</div>
+        <div className="bg-white rounded-lg my-4 ">
+        <div className="text-lg	font-semibold ml-4 p-1">{key}</div>
         <div className="flex gap-x-6 ">
           { value.map((slot )=>(
-           <div className=" ml-1 mb-2 p-2 hover:bg-black hover:text-white rounded-md"  onClick={()=>handleClick(slot.id)}>
+           <div className=" ml-4 mb-2 p-2 bg-black text-white rounded-md hover:opacity-70 cursor-default "  onClick={()=>handleClick(slot.id)}>
         {slot.time}
            </div>   
           )) }
@@ -62,7 +62,7 @@ function handleClick(slot){
           </Modelt>
          }
          </div>
-        </>
+      
     )
 }
 

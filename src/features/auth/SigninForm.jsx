@@ -18,7 +18,6 @@ const Signin = () => {
   const location = useLocation()
 const navigate = useNavigate()
 
-const user = useSelector((state) => state.user.username);
 const dispatch = useDispatch()
 
 
@@ -67,7 +66,7 @@ const dispatch = useDispatch()
 
   return (
     <div className='box-border  h-screen flex justify-center 	bg-no-repeat bg-cover text-white'  style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://cdn.pixabay.com/photo/2022/05/04/13/20/view-7173963__480.jpg")'}}> 
-       <form className=' w-1/3 h-1/2 p-8  mt-20 rounded-lg bg-black flex flex-col gap-y-8 shadow-orange-600	' onSubmit={handleSubmit}>
+       <form className=' w-1/3 opacity-70 p-8  mt-20 rounded-lg bg-black flex flex-col gap-y-8 shadow-orange-600	' style={{height : '60%' }} onSubmit={handleSubmit}>
       <div className='flex gap-x-16 mt-10'>
         <label className='text-lg font-semibold'>Email:</label>
         <input
@@ -75,7 +74,7 @@ const dispatch = useDispatch()
           name="email"
           value={credentials.email}
           onChange={handleChange}
-          className='text-black'
+          className='text-black ml-2'
         />
       </div>
       <div className='flex gap-x-10'>
@@ -88,7 +87,7 @@ const dispatch = useDispatch()
           className='text-black'
         />
       </div>
-      <div className='flex flex-col gap-y-3 '>
+      <div className='flex flex-col gap-y-3 mt-2'>
            <button type="submit" className=' bg-orange-700 px-4 py-2 rounded-lg'>Sign In</button>
            <div className='text-center'>Dont have an account? <Link to="/signup" className='text-blue-400	underline-offset-2	'>Signup</Link></div>
       </div>

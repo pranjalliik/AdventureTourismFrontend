@@ -24,6 +24,9 @@ import {ErrorBoundary} from 'react-error-boundary';
 import { Error } from "./utils/Error";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import { RestrictAccess } from "./features/auth/RestrictAccess";
+import {IsAuthorized} from "./features/auth/IsAuthorized"
+import { ReviewTour } from "./features/user/ReviewTour";
+import AboutUs from "./features/homephBody/AboutUs";
 axios.defaults.withCredentials = true;
 
 
@@ -70,8 +73,23 @@ console.log(role)
 
            
      <Route path="/signup" element={
-            <>
+            <RestrictAccess>
            <SignupForm></SignupForm>
+           </RestrictAccess>
+           }/>
+
+    
+<Route path="/aboutus" element={
+        <AboutUs/>
+           }/>
+
+
+<Route path="/review/:id" element={
+            <>
+           <ProtectedRoute>
+         <ReviewTour></ReviewTour>
+           </ProtectedRoute>
+
            </>
            }/>
 
@@ -119,17 +137,23 @@ console.log(role)
            }/>
 
            <Route path="/add" element={
-            <>
+            <ProtectedRoute>
+              <IsAuthorized>
             <SetAllTour/>
-            </>
+            </IsAuthorized>
+            </ProtectedRoute>
            }/>
            
              <Route path="/addslot/:id" element={
-            <>
+            
+            <ProtectedRoute>
+              <IsAuthorized>
             <DashBoardLayout>
               <CreateslotPage></CreateslotPage>
               </DashBoardLayout>
-            </>
+              </IsAuthorized>
+            </ProtectedRoute>
+          
            }/>
               
             <Route path="/profile" element={<Profile/>}>

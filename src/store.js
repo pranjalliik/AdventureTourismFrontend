@@ -5,10 +5,12 @@ import orderReducer from './features/booking/bookingSlice'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { persistStore, persistReducer } from 'redux-persist'
 import { combineReducers } from "@reduxjs/toolkit";
-
+import slotSlice from "./features/Admin/TimeAndDate/SlotSlice";
+import reviewSlice from "./features/user/reviewSlice";
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['user', 'cart'] 
   }
 
 
@@ -16,6 +18,8 @@ const persistConfig = {
   const rootReducer = combineReducers({
     user: userReducer,
     cart: cartReducer,
+    slot : slotSlice,
+    review : reviewSlice
     // Add other reducers if needed
   });
   

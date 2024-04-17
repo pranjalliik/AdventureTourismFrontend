@@ -25,6 +25,9 @@ function Banner(){
       const fDate = new Date()
       const formattedDate = fDate.toLocaleString(); // This will format the date in your local time zone
 
+    function handleClick(){
+   
+    }
 
 
 
@@ -92,14 +95,13 @@ Every destination is a chapter, and your adventure story begins here. Join us as
             <div className="h-5/6 ml-20 mt-6 w-1/2 bg-no-repeat" style={{ backgroundImage: `url(${svg})` }} ></div>
              <div className="h-5/6 w-full mt-6 flex justify-center items-center	">
                 <div className="  bg-red-200 w-8/12  rounded-lg h-3/5">
-                    <div className="font-bold	p-4 text-lg">FIND ACTIVITY NEAR YOU</div>
+                    <div className="font-bold	p-4 text-lg">Experience Adventure Everywhere</div>
 
                     <div className="px-4 pt-2 ">
-                        <input type="text" placeholder="Enter your location" className="w-3/4 h-8 px-3 rounded-lg"/> 
-                        <span  class="material-symbols-outlined p-1 cursor-default	hover:text-orange-700">
-                            search
-                          </span>
-                        <button className="w-3/4 bg-orange-700 mt-6 p-2 rounded-lg font-semibold">Find my current location</button>
+                        <div className="">Discover thrilling experiences tailored to you on our adventure tourism website</div> 
+                      <Link to="/aboutus">
+                        <button className="w-3/4 bg-orange-700 mt-6 p-2 rounded-lg font-semibold" onClick={handleClick}>About us</button>
+                        </Link>
                     </div>
                 </div>
                 </div>  

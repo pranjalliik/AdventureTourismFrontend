@@ -35,6 +35,7 @@ export const setAuthToken = token => {
     const response = await axios.post(
       'http://localhost:5000/users/signup',data
     );
+    console.log(response)
     return response;
   } catch (error) {
     console.error(error);

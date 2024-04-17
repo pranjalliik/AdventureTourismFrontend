@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { TailSpin } from "react-loader-spinner";
-
+import { Link } from "react-router-dom";
 function TopPlans(){
 
     const {isLoading,data: Tours, error,} = useQuery({
@@ -18,44 +18,48 @@ function TopPlans(){
 console.log(Tours)
 
 return (
-    <div className="bg-black w-full bg-black">
-      {isLoading ? (
-        <div className="flex justify-center pt-16 pb-10">
-        <TailSpin
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="tail-spin-loading"
-          radius="1"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-         
-        />
-        </div>
-      ) : (
+    <div className="bg-black w-full bg-black pt-12">
+  
       <>
       <div className="flex justify-center p-4">      
           <h1 className="text-white font-semibold text-3xl font-sans tracking-wide
-underline-offset-4
-">EXPLORE</h1>
+     underline-offset-4 pb-8 pt-8" style={{fontFamily: "Times New Roman"}}>EXPLORE</h1>
       </div>
 
         <div className="flex  justify-around  pb-16 ">
-           {Tours.map((tour) => (
+          
 
-      <div className="h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
-                    backgroundImage: `url(${require(`../../images/${tour.photo}`)})`,
+      <div className="shadow-lg shadow-gray-700	 h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
+                    backgroundImage: `url('https://i.pinimg.com/236x/be/19/a2/be19a2b2b8043f95dbb55fe7ce86d57d--youghiogheny-river-ohiopyle.jpg')`,
                   }}>
-          <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 hover:bg-orange-800" ><button className="text-white font-bold text-xl hover:text-black ">VIEW  </button> </div>
-       </div>
-                
-           ))}
+        <Link to='/tours?search_query=rafting' > <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 hover:bg-black" ><button className="text-white font-bold text-xl ">VIEW  </button> </div>
+        </Link>   </div>
+          
+      
+       <div className="shadow-lg shadow-gray-700	 h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
+                    backgroundImage: `url('https://i.pinimg.com/236x/03/36/6f/03366fcec69dff2dc54df892e65aabff--skydiving-group-activities.jpg')`,
+                  }}>
+          <Link to='/tours?search_query=sky+diving' >  <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 hover:bg-black" ><button className="text-white font-bold text-xl  ">VIEW  </button> </div>
+          </Link> </div>
+
+
+       <div className="shadow-lg shadow-gray-700	 h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
+                    backgroundImage: `url('https://i.pinimg.com/236x/fd/80/cc/fd80cc8539c770799fddda0d56017545.jpg')`,
+                  }}>
+          <Link to='/tours?search_query=siking' >  <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 hover:bg-black" ><button className="text-white font-bold text-xl  ">VIEW  </button> </div>
+          </Link>  </div>
+
+
+       <div className="shadow-lg shadow-gray-700	 h-72 w-64 rounded-lg bg-cover flex flex-col justify-end"   style={{
+                    backgroundImage: `url('https://sportishka.com/src.php?src=https://sportishka.com/uploads/posts/2022-03/1647543499_1-sportishka-com-p-slet-turistov-turizm-krasivo-foto-1.jpg&w=260&h=390')`,
+                  }}>
+       <Link to='/tours?search_query=camping' >     <div className="flex justify-center py-6 bg-black opacity-70 hover:opacity-100 " ><button className="text-white font-bold text-xl hover:text-black ">VIEW  </button> </div>
+       </Link> </div>
            
         </div>
         
         </>
-      )}
+    
     </div>
   );
   

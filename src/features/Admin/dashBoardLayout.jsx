@@ -5,11 +5,11 @@ function DashBoardLayout({children}){
 
     return(
         <>
-       <div className="w-full flex">
+       <div className="w-full flex " style={{backgroundColor : "#151518"}}>
         <SideBar></SideBar>
 
   
-        <div className="w-full">
+        <div className="w-full" >
            
             {children}</div>
         </div>

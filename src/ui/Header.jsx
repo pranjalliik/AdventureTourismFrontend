@@ -74,14 +74,14 @@ function Header(){
 
                         <span className="text-orange-500 material-symbols-outlined pl-8 pb-2 cursor-pointer mr-8 pt-3 hover:text-orange-700"  >
                      <Link to="/cart">
-                          shopping_cart
+                          favorite
                         </Link>
                              </span>
                              <div className="relative">
                            {
                               username &&
                               <>
-                             <span className="text-orange-900 material-symbols-outlined pb-2 cursor-pointer mr-8 pt-3 hover:text-orange-700" onClick={ ()=> setprofileDropdown(!profileDropdown)} >
+                             <span className="text-orange-500 material-symbols-outlined pb-2 cursor-pointer mr-8 pt-3 hover:text-orange-700" onClick={ ()=> setprofileDropdown(!profileDropdown)} >
                              account_circle
                              </span>
                               
