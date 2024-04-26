@@ -30,6 +30,7 @@
     "react-star-ratings": "^2.3.0",
     "read-more-react": "^1.0.10",
     "redux-persist": "^6.0.0",
+    "redux-persist-transform-filter": "^0.0.22",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
@@ -58,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

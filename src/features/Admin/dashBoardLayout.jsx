@@ -1,5 +1,4 @@
 import { SideBar } from "./SideBar"
-import { LineChart } from "./LineChart"
 
 function DashBoardLayout({children}){
 

@@ -1,4 +1,7 @@
 
+
+
+
 .bg-ptn{
     background: radial-gradient(#e7201e 15%, transparent 16%, transparent 49%, #e7201e 50%, transparent 51%),radial-gradient(circle at top left, #e7201e 10%, transparent 10%, transparent 39%, #e7201e 40%, transparent 41%),radial-gradient(circle at top right, #e7201e 10%, transparent 10%, transparent 39%, #e7201e 40%, transparent 41%),radial-gradient(circle at bottom left, #e7201e 10%, transparent 10%, transparent 39%, #e7201e 40%, transparent 41%),radial-gradient(circle at bottom right, #e7201e 10%, transparent 10%, transparent 39%, #e7201e 40%, transparent 41%);
         background-size: 3em 3em;

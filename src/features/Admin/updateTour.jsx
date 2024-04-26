@@ -5,7 +5,7 @@ import { update } from "lodash";
 
 
 function UpdateTour({Name ,Price, Discount,id,photo}){
-console.log(id, photo)
+
   const  [newName, setNewName] =  useState(Name);
   const  [newPrice, setNewPrice] =  useState(Price);
   const  [newDiscount, setNewDiscount] =  useState(Discount);
@@ -15,12 +15,10 @@ console.log(id, photo)
 
   function handleFileChange(event) {
    
-    console.log(event.target.files[0])
     setFile(event.target.files[0])
   }
-console.log(file)
+
   const handleChange = (event) => {
-    console.log(event.target)
     const { name, value } = event.target;
 
     if(name === 'newName'){
@@ -52,37 +50,26 @@ let a =0;
 
 if(newName != Name ){
 
-  formData.append('name', newName);
+  formObj.name = newName;
   a++
 }
 
 if(newPrice != Price ){
-  formData.append('price', newPrice);
+  formObj.price = newPrice;
    a++
 }
 
 if(newDiscount != Discount){
-  formData.append('discount', newDiscount);
+  formObj.discount = newDiscount;
    a++;
 }
 
-if(file){
-  formData.append('photo', file);
-a++;
-}
 
 if(a === 0){
   return;
 }
-console.log(id)
-mutation.mutate({ data: formData, id: id })
+mutation.mutate({ data: formObj, id: id })
 
-if(mutation.isSuccess){
-  console.log(mutation.data)
-}
-if(mutation.isError){
- console.log(mutation.error)
-}
 
 }
 
@@ -121,3 +108,5 @@ if(mutation.isError){
 }
 
 export {UpdateTour}
+
+

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query";
-import { createShow } from "../../../services/apiBook";
+import { createSlot } from "./SlotSlice";
 import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 
 function SformB(){
 
@@ -11,7 +11,8 @@ function SformB(){
     const [day,setDay] = useState('')
     const [capacity,setCapacity] = useState('')
 
-    const mutation = useMutation(createShow);
+    const dispatch = useDispatch()
+
     let parm = useParams()
 
 function handleChange(event){
@@ -49,21 +50,14 @@ function handleSubmit(event){
     const data = {
         year: year,
         month: month -1 ,
-        day: day,
+        day: parseInt(day)+1,
         capacity : capacity,
-        seheduleType : 'dayWise'
+        seheduleType : 'dayWise',
+        capacityLeft : capacity
       };
-console.log(data);
-console.log(parm.id)
     
-mutation.mutate({ slotdata: data, id:  parm.id  })
+dispatch(createSlot({ sdata: data, id:  parm.id  }));
 
-if(mutation.isSuccess){
-  console.log(mutation.data)
-}
-if(mutation.isError){
- console.log(mutation.error)
-}
 
 }
 

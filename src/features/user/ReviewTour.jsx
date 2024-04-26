@@ -10,7 +10,6 @@ function ReviewTour(){
 
   const dispatch = useDispatch()
   let status = useSelector((state)=> state.review.status);
-console.log(status)
 const[rating,setRating] = useState(0)   
 const[review,setReview] = useState('')   
 
@@ -39,8 +38,7 @@ const handleClick = async (event) => {
 
     dispatch(createReview({rating , review,id : param.id}))
   } catch (error) {
-    console.error('Sign-in failed:', error);
-    // Display error message or handle the failure case.
+
   }
 };
 

@@ -1,14 +1,10 @@
 
 import React, { useState ,useEffect} from 'react';
-import { signin } from '../../services/authApi';
 import  {useSelector,useDispatch} from 'react-redux'
-import { updateName } from '../users/userSlice';
-import { updateRole } from '../users/userSlice';
-import { updateEmail } from '../users/userSlice';
+import { signin } from '../users/userSlice';
 import {Link} from "react-router-dom"
-import loginImg from '../../images/loginImg.jpg';
 import { useLocation,useNavigate } from 'react-router-dom';
-
+import { ThreeDots } from 'react-loader-spinner';
 
 
 
@@ -20,7 +16,8 @@ const navigate = useNavigate()
 
 const dispatch = useDispatch()
 
-
+let status = useSelector((state)=> state.user.status);
+let error = useSelector((state)=> state.user.error);
 
 
 
@@ -43,22 +40,15 @@ const dispatch = useDispatch()
     event.preventDefault();
 
     try {
-      const response = await signin(credentials);
-      console.log('Sign-in successful. Token:', response);
-      // Perform further actions or redirect to another page.
-        console.log();
+   dispatch(signin({email : credentials.email , password : credentials.password}))
+   
 
-      dispatch(updateName(response.user.name))
-      dispatch(updateRole(response.user.role))
-      dispatch(updateEmail(response.user.email))
 
       if(location.state?.from){
            navigate(location.state.from)
       }
     
     } catch (error) {
-      console.error('Sign-in failed:', error);
-      // Display error message or handle the failure case.
     }
   };
 
@@ -75,7 +65,7 @@ const dispatch = useDispatch()
           value={credentials.email}
           onChange={handleChange}
           className='text-black ml-2'
-        />
+       required />
       </div>
       <div className='flex gap-x-10'>
         <label className='text-lg font-semibold'>Password:</label>
@@ -85,13 +75,27 @@ const dispatch = useDispatch()
           value={credentials.password}
           onChange={handleChange}
           className='text-black'
-        />
+       required />
       </div>
       <div className='flex flex-col gap-y-3 mt-2'>
            <button type="submit" className=' bg-orange-700 px-4 py-2 rounded-lg'>Sign In</button>
            <div className='text-center'>Dont have an account? <Link to="/signup" className='text-blue-400	underline-offset-2	'>Signup</Link></div>
       </div>
+      {status === 'loading' ?
+      <div  className="ml-32">
+      <ThreeDots
       
+        color="#D3D3D3" // Change color of loader
+        height={10} // Set height of loader
+        width={100} // Set width of loader
+      />
+      </div> :
+      status === 'failed' ?
+      <div className='relative pt-1'>
+      <div className='text-red-500 font-semibold absolute bottom-1 ml-28'>{error}</div>
+      </div>
+      :<></>
+      }
 
     </form>
 

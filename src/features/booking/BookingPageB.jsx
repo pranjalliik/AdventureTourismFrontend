@@ -19,20 +19,20 @@ function handleClick(slot){
 function displayDate(x){
   const formattedDate = x.toLocaleString();
   let dateData = formattedDate.split('T18:30:00.000Z')
-  console.log(formattedDate)
   return dateData[0];
 }
 
 
 
     return(
-<div className="ml-20 mt-10 p-6  box-border mr-6 bg-gray-100 rounded-lg mb-10 flex "   style={{boxShadow : "2px 2px  15px 2px  gray  "}}>
+<div className="ml-20 mt-10 p-6  box-border mr-6 bg-gray-100 rounded-lg mb-10 flex  justify-around "   style={{boxShadow : "2px 2px  15px 2px  gray  "}}>
 
 
        
 {
            data.length === 0? (
-      <TailSpin
+            <div className="flex justify-center">  
+          <TailSpin
       height="80"
       width="80"
       color="#4fa94d"
@@ -41,11 +41,11 @@ function displayDate(x){
       wrapperStyle={{}}
       wrapperClass=""
       visible={true}
-    />
+    /></div>
     ) :
     data.map((slot) => (
         
-        <div className=" p-2 bg-black font-semibold  hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot)}  >{displayDate(slot.date)}</div>
+        <div className=" p-2 bg-black font-semibold  hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot._id)}  >{displayDate(slot.date)}</div>
 
         
      

@@ -11,6 +11,8 @@ import { TailSpin } from 'react-loader-spinner'
 import { Error } from "../../utils/Error";
 function BookingLayout(){
 
+  const api_url = process.env.REACT_APP_API_URL;
+
     let parm = useParams()
     const [selectedSlot,setSelectSlot] = useState()
 
@@ -31,7 +33,7 @@ function BookingLayout(){
         queryKey: ["Tour"],
         queryFn: async function getTour(id){
             try{
-            const res = await  axios.get(`http://localhost:5000/tours/${parm.id}`) 
+            const res = await  axios.get(`${api_url}/tours/${parm.id}`) 
                      return res;
             }
         catch(err){
@@ -43,16 +45,12 @@ function BookingLayout(){
 
       let hashMap = new Map();
 
- if(info){
-    console.log(info)
- }
 
       if(data){
        hashMap = mapdates(data)
        
         let map = hashMap[0]
-      console.log(map)
-      console.log(hashMap)
+     
       }
 
 
@@ -62,6 +60,8 @@ return(
       
        {
         loading ? (
+          <div className="flex justify-center flex justify-center mt-10">
+
             <TailSpin
             height="80"
             width="80"
@@ -71,7 +71,7 @@ return(
             wrapperStyle={{}}
             wrapperClass=""
             visible={true}
-          />
+          /></div>
         ) : err? (
             <Error/>
         ): <>
@@ -80,11 +80,11 @@ return(
          <BookingPage hashMap = {hashMap}
          setSlot = {setSlot}
          >
-             <NoOfPeople selectedSlot={selectedSlot}></NoOfPeople>
+             <NoOfPeople maxBooking={info.data.data.maxBooking} selectedSlot={selectedSlot}></NoOfPeople>
          </BookingPage>
           : 
             <BookingPageB  data={data} setSlot = {setSlot}>
-                <NoOfPeople selectedSlot={selectedSlot}></NoOfPeople>
+                <NoOfPeople   maxBooking={info.data.data.maxBooking} selectedSlot={selectedSlot}></NoOfPeople>
             </BookingPageB>
 
         }

@@ -26,16 +26,16 @@ let options
 function LineChart(){
 
 
- 
+  const api_url = process.env.REACT_APP_API_URL;
+
 
   const[TourSales,setTourSales] = useState()
 
 const fetchData = async () => {
   try {
-      const res = await axios.get("http://localhost:5000/tours/monthlysales");
+      const res = await axios.get(`${api_url}/tours/monthlysales`);
       return res.data.data;
   } catch (error) {
-      console.error('Error fetching data:', error);
       return [];
   }
 };
@@ -77,8 +77,7 @@ useEffect(() => {
       smonth = (smonth %12  )+1
     }
      
-    console.log(month)
-    console.log(arr)
+ 
     
      data = {
       
@@ -149,12 +148,7 @@ useEffect(() => {
   }
 
 
-  console.log(TourSales)
 
-
-
-
-    
     return(
        <>
       {

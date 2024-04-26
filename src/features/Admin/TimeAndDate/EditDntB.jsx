@@ -8,7 +8,6 @@ function EditdntB({info,date}){
 
 const datearr = date.split("/");
 const dispatch = useDispatch()
-console.log('sdfgh')
 const delMutation = useMutation(deleteSlot)
 
 
@@ -53,7 +52,6 @@ const areYousure= async (event)=>{
     if(whatActiontoPerform === 'update'){
        
         handleUpdate()
-       console.log('ghj')
         return;
     }else{
      handleDelete();
@@ -74,7 +72,6 @@ function handleChange(event){
      setChange(false)
 
     const { name, value } = event.target;
-    console.log(value)
     if(name === 'capacity'){
         setCapacity(value)
     }

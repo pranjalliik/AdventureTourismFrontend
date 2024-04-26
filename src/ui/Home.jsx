@@ -1,7 +1,6 @@
 import { Banner } from "./Banner"
 import { TopPlans } from "../features/homephBody/TopPlans"
 import { Reeviews } from "../features/homephBody/Reviews"
-import { Signout } from "../features/auth/Signout"
 import { Illustration } from "../features/homephBody/illustrations"
 
 function Home(){

@@ -11,12 +11,12 @@ function UserInfoForm(){
 
         <div className="flex flex-col gap-y-2">
             <label className="text-lg font-semibold">Email</label>
-            <input className=" w-2/3 h-10 p-2 border border-neutral-400 " value={email}  contenteditable="false"></input>
+            <input className=" w-2/3 h-10 p-2 border border-neutral-400 " value={email}  contentEditable="false"></input>
         </div>
 
         <div className="flex flex-col gap-y-2">
             <label className="text-lg font-semibold">Name</label>
-            <input className=" w-2/3 h-10 p-2 border border-neutral-400 " value={username}  contenteditable="false"></input>
+            <input className=" w-2/3 h-10 p-2 border border-neutral-400 " value={username}  contentEditable="false"></input>
         </div>
  
 

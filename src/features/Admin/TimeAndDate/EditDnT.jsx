@@ -10,8 +10,7 @@ function Editdnt({info,date}){
 
     const dispatch = useDispatch()
 
-console.log(info)
-console.log(date)
+
 const datearr = date.split("/");
 
 const timerr = info.time.split(':')
@@ -22,7 +21,6 @@ const [capacity,setCapacity] = useState(info.capacity)
 const [change,setChange] = useState()
 const [whatActiontoPerform,setwhatActiontoPerform] = useState()
 
-console.log(info)
 
 const delMutation = useMutation(deleteSlot)
 const handleUpdate = async ()=>{
@@ -57,7 +55,6 @@ const areYousure= async (event)=>{
     if(whatActiontoPerform === 'update'){
        
         handleUpdate()
-       console.log('ghj')
         return;
     }else{
      handleDelete();
@@ -67,7 +64,6 @@ const areYousure= async (event)=>{
 
 const upDelclicked =  (event)=>{
     event.preventDefault();
-     console.log(hours + " " + min)
     if(change) return
 
     setwhatActiontoPerform(event.target.name) 
@@ -78,7 +74,6 @@ function handleChange(event){
      setChange(false)
 
     const { name, value } = event.target;
-    console.log(value)
     if(name === 'hour'){
         setHours(value)
     }else if(name === 'min'){

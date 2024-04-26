@@ -1,11 +1,12 @@
 import axios from 'axios'
 //const apiUrl = 'http://localhost:5000/users/signin'
+let api_url = process.env.REACT_APP_API_URL;
 
 
  export async function signin ({ email, password })  {
     try {
       const response = await axios.post(
-        'http://localhost:5000/users/signin',
+        `${api_url}/users/signin`,
         JSON.stringify({ email, password }),
         {
           headers: { 'Content-Type': 'application/json' },
@@ -33,29 +34,25 @@ export const setAuthToken = token => {
    
 
     const response = await axios.post(
-      'http://localhost:5000/users/signup',data
+      `${api_url}/users/signup`,data
     );
-    console.log(response)
     return response;
   } catch (error) {
-    console.error(error);
     throw new Error('Sign-in request failed.');
   }
 };
 
 export async function signout ()  {
-  console.log("hii")
   try {
    
 
     const response = await axios.post(
-      'http://localhost:5000/users/signout', { headers: {
+      `${api_url}/users/signout`, { headers: {
         'Content-Type': 'application/json',
       },
   });
     return response;
   } catch (error) {
-    console.error(error);
     throw new Error('Sign-in request failed.');
   }
 };

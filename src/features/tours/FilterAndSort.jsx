@@ -74,7 +74,7 @@ console.log(value)
     return(
         <>
          <div className="flex bg-gray-200 w-min	rounded-lg ">
-                <span class="material-symbols-outlined py-2 px-1  hover:opacity-50 "  >
+                <span className="material-symbols-outlined py-2 px-1  hover:opacity-50 "  >
                      search
                 </span>
                

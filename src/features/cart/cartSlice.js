@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useSelector } from "react-redux";
+
+
+const api_url = process.env.REACT_APP_API_URL;
 
 const initialState = {
   cart: [],
@@ -16,7 +18,7 @@ export const getCartItems = createAsyncThunk(
      
     let likedTours = []
     for(let i=1;i<items.length;i++){
-  const res = await  axios.get(`http://localhost:5000/tours/${items[i].id}`) 
+  const res = await  axios.get(`${api_url}/tours/${items[i].id}`) 
        likedTours.push(res.data.data)
 }
 return likedTours
@@ -35,8 +37,8 @@ const cartSlice = createSlice({
           console.log(state.cart);
       },
       deleteItem: (state, action) => {
-          state.cart = state.cart.filter((item, idx) => idx !== action.payload);
-          state.fetchedTours = state.fetchedTours.filter((item, idx) => idx !== action.payload-1);
+          state.cart = state.cart.filter((item, idx) => idx == 0 || item.id !== action.payload);
+          state.fetchedTours = state.fetchedTours.filter((item, idx) => item._id !== action.payload);
 
       },
       clearCart: (state) => {

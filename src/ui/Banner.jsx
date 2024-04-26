@@ -17,7 +17,7 @@ import Slider from "react-slick";
 
 
 
-const slides = [bgimg2,bgimg5,];
+const slides = [bgimg5,''];
 
 function Banner(){
     const [index, setIndex] = useState(0);
@@ -48,7 +48,7 @@ function Banner(){
 
   
       return (
-<div id="default-carousel" className=" h-5/6 w-full overflow-hidden bg-orange-800 relative" >
+<div id="default-carousel" className=" h-5/6 w-full overflow-hidden bg-red-200 relative" >
 
 <div
         className={`bg-red-100 h-full  w-full flex transition ease-out duration-1000`}
@@ -59,9 +59,9 @@ function Banner(){
   {slides.map((backgroundImg, index) => (
 
 
-    (index === 1) ? (
+    (index === 0) ? (
       <div className="flex-shrink-0 h-full w-full bg-no-repeat bg-cover relative inline-block" key={index} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImg})` }}>
-        {index === 1 ? (
+        {index === 0 ? (
             <>
            <div className="w-3/5" style={{ borderTop: '100vh solid black', borderRight: '100px solid transparent' }}>
          
@@ -150,7 +150,7 @@ Every destination is a chapter, and your adventure story begins here. Join us as
     data-carousel-prev=""
     onClick={previousSlide}
   >
-    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+    <span className="inline-flex items-center  justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
       <svg
         className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
         aria-hidden="true"
@@ -176,7 +176,7 @@ Every destination is a chapter, and your adventure story begins here. Join us as
     onClick={nextSlide}
 
   >
-    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
       <svg
         className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
         aria-hidden="true"
@@ -211,90 +211,5 @@ Every destination is a chapter, and your adventure story begins here. Join us as
 
 export {Banner}
 
-//url(${bgimg3})
-
-
-
-
- /*
-
-
-  <div className="relative h-full overflow-hidden flex transition ease-out duration-40"
-        style={{
-          transform: `translateX(-${current * 100}%)`,
-        }}>
-  {slides.map((backgroundImg, index) => (
-      <div className="flex-shrink-0 h-full w-full bg-no-repeat bg-cover inline-block" key={index} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${backgroundImg}` }} />
-    ))}
-    
-  </div>
-
-
-
-
- 
-<div className="h-5/6 overflow-hidden w-full relative">
-  <div className="h-full w-full flex transition-transform duration-7000 ease-in-out transform" style={{ transform: `translate3d(${-index * 100}vw, 0, 0)` }}>
-    {colors.map((backgroundColor, index) => (
-      <div className="flex-shrink-0 h-full w-full bg-no-repeat bg-cover inline-block" key={index} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bgimg4}` }} />
-    ))}
-  </div>
-</div>
-
-
-
-
-
-
-   
-    )
-}*
-
-
-
-
-
-
-
-
-
-
-
-
- <div className="bg-orange-900 h-full w-full bg-no-repeat bg-cover inline-block"  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bgimg4}` }}></div>
- <div className="bg-orange-900 h-full w-full bg-no-repeat bg-cover inline-block"  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bgimg4}` }}></div>
- <div className="bg-orange-900 h-full w-full bg-no-repeat bg-cover inline-block"  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${bgimg4}` }}>
-
-
-
-
-       <div className="flex flex-col ">
-        <div className="text-3xl pr-5 pt-10 pl-11 mr-8 font-sans font-semibold">Embark on Extraordinary Journeys<br/>
-to Uncharted Destinations!</div>
-<Link to="tours" className="bg-orange-700 p-4 rounded-lg text-white font-bold text-xl py-2 h-12 w-40 mt-4 ml-10" >FIND A TOUR</Link>
-
-        </div>
-
-
-
-
-
-
-
-
-     <Slideshow className="">
-    <SlideshowSlider style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }} >
-      {colors.map((backgroundColor, index) => (
-        <Slide className="slide" key={index} style={{ backgroundColor }}/>
-      ))}
-    </SlideshowSlider>
-    <SlideshowDots className="">
-        {colors.map((_, idx) => (
-          <SlideshowDot key={idx} className={`${index === idx ? "bg-white" : ""}`}></SlideshowDot>
-        ))}
-      </SlideshowDots>
-  </Slideshow>    
-       
-*/
 
         

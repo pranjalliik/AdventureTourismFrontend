@@ -1,8 +1,9 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useEffect } from "react";
-import { mapdates } from "../../../services/apiBook";
+
+
+const api_url = process.env.REACT_APP_API_URL;
 
 
 const initialState = {
@@ -18,11 +19,9 @@ const initialState = {
     async ({id}, { rejectWithValue }) => {
        
       try {
-      let data =  await  axios.delete(`http://localhost:5000/slots/${id}`)
-      console.log(data)
+      let data =  await  axios.delete(`${api_url}/slots/${id}`)
         return data;
       } catch (error) {
-        console.log(error);
         return;
       }
     }
@@ -34,7 +33,7 @@ const initialState = {
     async ({id,newdata}, { rejectWithValue }) => {
        
       try {
-      let data =  await  axios.patch(`http://localhost:5000/slots/${id}`,
+      let data =  await  axios.patch(`${api_url}/slots/${id}`,
         newdata , {
          headers: {
            'Content-Type': 'application/json',
@@ -42,7 +41,6 @@ const initialState = {
     })
         return data;
       } catch (error) {
-        console.log(error);
         return;
       }
     }
@@ -54,7 +52,7 @@ const initialState = {
     async ({sdata,id}, { rejectWithValue }) => {
        
       try {
-      let data =  await  axios.post(`http://localhost:5000/slots/${id}`,
+      let data =  await  axios.post(`${api_url}/slots/${id}`,
         sdata , {
          headers: {
            'Content-Type': 'application/json',
@@ -62,7 +60,6 @@ const initialState = {
     })
         return data;
       } catch (error) {
-        console.log(error);
         return;
       }
     }
@@ -76,15 +73,12 @@ const initialState = {
   export const getAllSlot = createAsyncThunk(
     "slots/get",
     async (values) => {
-        console.log('hii')
 
       let {id} = values
         try {
-      const response = await axios.get(`http://localhost:5000/slots/${id}`)
-      console.log(response.data)
+      const response = await axios.get(`${api_url}/slots/${id}`)
       return response.data;
     } catch (error) {
-      console.error(error);
       throw new Error('cannot get slots');
     }
       
@@ -101,7 +95,6 @@ const initialState = {
       builder
         .addCase(updateSlot.fulfilled, (state, action) => {
           state.status = "succeeded";
-          console.log(action.payload)
           const updatedSlot = action.payload.data.data;
           state.Slot = state.Slot.map((slot) =>
             slot._id === updatedSlot._id ? updatedSlot : slot
@@ -165,6 +158,5 @@ const initialState = {
     }
   }) 
 
- // export const {updateMessagesAndConversations} = chatSlice.actions
 
 export default slotSlice.reducer;

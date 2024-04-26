@@ -28,19 +28,7 @@ function Reeviews(){
 
     let [rev,setrev] = useState([])
 
-    useEffect(() => {
-        axios
-          .request("http://localhost:5000/reviews")
-          .then(function (response) {
-            console.log(response.data.data);
-           console.log("hii")
-            setrev(response.data.data);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      }
-   , []);
+
 
       const Backg = styled.div`
       background-color: #000000;
@@ -53,23 +41,7 @@ background-repeat: repeat;
 
       return (
         <>
-          {rev.length === 0 ? (
-           
-           <div className="flex justify-center pt-16 bg-black pb-10">
-           <TailSpin
-             height="80"
-             width="80"
-             color="#4fa94d"
-             ariaLabel="tail-spin-loading"
-             radius="1"
-             wrapperStyle={{}}
-             wrapperClass=""
-             visible={true}
-            
-           />
-           </div>
-
-          ) : (<>
+         
      
      <div className="flex justify-center p-4 bg-black pt-6">      
           <h1 className=" text-white font-semibold text-3xl font-sans tracking-wide
@@ -142,8 +114,8 @@ background-repeat: repeat;
                 </div>
              
               </div>
-            </>
-          )}
+            
+        
         </>
       );
       

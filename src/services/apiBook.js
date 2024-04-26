@@ -1,10 +1,10 @@
 import Axios from 'axios';
 import axios from 'axios';
 
-const api_url = "http://localhost:5000/slots";
+const api_url = process.env.REACT_APP_API_URL;
 
 export async function getAllSlots(id){
-const res = await fetch(`${api_url}/${id}`)
+const res = await fetch(`${api_url}/slots/${id}`)
 
 const {data} = await res.json();
 return data;
@@ -18,31 +18,25 @@ export async function createShow({id,slotdata}){
      },
 })
 .then(function (response) {
-console.log(response)
 return response
 })
 .catch(function (error) {
- console.log("hii")
-console.error(error);
 });
     }
 
 
 
     export async function updateshow({id,newdata}){
-      Axios.patch(`${api_url}/${id}`,
+      Axios.patch(`${api_url}/slots/${id}`,
       newdata, {
        headers: {
          'Content-Type': 'application/json',
        },
   })
   .then(function (response) {
-  console.log(response)
   return response
   })
   .catch(function (error) {
-   console.log("hii")
-  console.error(error);
   });
       
      
@@ -73,20 +67,18 @@ return hashMap
 
 
 export async function deleteSlot({id}){
- let data = await axios.delete(`http://localhost:5000/slots/${id}`)
+ let data = await axios.delete(`${api_url}/slots/${id}`)
  
 }
 
 export async function createBooking({id,no}){
-  console.log(id +" "+no)
-  let response = await axios.post(`http://localhost:5000/book/${id}`,
+  let response = await axios.post(`${api_url}/book/${id}`,
  { no}  , {
    headers: {
      'Content-Type': 'application/json',
    },
 })
 
-console.log(response)
 return response
 
 }
@@ -94,8 +86,7 @@ return response
 
 export async function getShow({id}){
 
-  const res = await axios.get(`http://localhost:5000/slots/show/${id}`);
-console.log(res);
+  const res = await axios.get(`${api_url}/slots/show/${id}`);
 return res.data.data;
 
 }
@@ -105,8 +96,7 @@ return res.data.data;
 
 export async function getUserBookings(){
 
-  const res = await axios.get("http://localhost:5000/book/getReservations");
-console.log(res);
+  const res = await axios.get(`${api_url}/book/getReservations`);
 return res.data.data;
 
 }

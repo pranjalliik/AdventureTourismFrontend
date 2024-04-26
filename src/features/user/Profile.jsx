@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 function Profile(){
   let location = useLocation().pathname;
-  console.log(location)
     return(
         <>
         <div className="flex justify-start pl-40 gap-x-20 p-10 pb-6  font-bold text-xl bg-gray-100 " >

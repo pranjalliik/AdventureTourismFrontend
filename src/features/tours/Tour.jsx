@@ -11,11 +11,15 @@ import { Outlet } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 import { useSearchParams } from "react-router-dom";
 import { FilterAndSort } from "./FilterAndSort";
+import { deleteItem } from "../cart/cartSlice";
 
 
  function Tour(){
   const role = useSelector((state)=> state.user.role)
   const[searchParams,setSearchParams] = useSearchParams();
+
+  let items = useSelector((state)=> (state.cart.cart))
+
 
   let priceorder = searchParams.get('order');
   let ratingFilter = searchParams.get('rating');
@@ -56,6 +60,12 @@ function handleView(tour){
 
 function handleAddToCart(tour){
 
+  for(let i =1;i<items.length;i++){
+    if(items[i].id === tour._id){
+      dispatch(deleteItem(tour._id))
+      return 
+    }
+ }
 
     const newItem = {
       id : tour._id,
@@ -69,6 +79,9 @@ function handleAddToCart(tour){
     queryKey: ["Tours"],
     queryFn: getTours,
   });
+
+
+
 
 
 
@@ -91,7 +104,9 @@ function handleAddToCart(tour){
    
   }
 if(searchquery){
-  arr = arr.filter((tour)=>tour.name.toLowerCase() === searchquery.toLowerCase())
+  
+  console.log(arr)
+  arr = arr.filter((tour)=>tour.name.toLowerCase() === searchquery.toLowerCase() || tour.category.toLowerCase() === searchquery.toLowerCase() )
 }  
 
   return arr
@@ -100,6 +115,17 @@ if(searchquery){
  // )
 
 };
+
+
+function fillColor(id){
+console.log(items)
+
+for(let i =1;i<items.length;i++){
+   if(items[i].id === id)return '#FF0000'
+}
+return 'white'
+}
+
     return(
         <>
        {
@@ -122,23 +148,39 @@ if(searchquery){
     <>
  
 
-    <div className="grid grid-cols-5	items-start	pt-12 ">   
+    <div className="grid grid-cols-5	items-start	pt-12 mb-12">   
     <div className="sticky  top-0 pt-6 p-6 flex flex-col gap-y-4" > 
             <FilterAndSort/>
             </div>    
-    <div className=" mx-12 border bg-gray-200 rounded-md col-span-4">
+    <div className=" ml-8 border bg-gray-200 rounded-md col-span-4 grid  grid-cols-2 pr-4	 ">
       
     {filteredData(Tours).map((tour) => (
-      <div className=" mx-12 my-7 p-3 rounded-md bg-white flex ">
+      <div className=" w-11/12 rounded-md bg-white flex-col mx-8 my-5 pb-3 " key={tour._id}>
+        <div style={{height : '250px'}} className="w-full relative">
+        <div className="p-1 right-2 top-2 absolute rounded-full bg-white "   onClick={()=>{handleAddToCart(tour)}}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width= '30px'
+      height='30px'
+      fill={fillColor(tour._id)}
+      stroke= 'black'
+    >
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    </div>
+
         <div
           
-          style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})` }} className="rounded-lg  h-44 w-2/5 bg-no-repeat	bg-cover	 "
+          style={{ backgroundImage: `url(${require(`../../images/${tour.photo}`)})`  }} className="rounded-lg  h-full w-full bg-no-repeat	bg-cover	 "
           alt=""
         />
+         </div>
         <div className="flex flex-col ml-12">
   <div className=" flex flex-col font-medium mt-3">
 
-    <h1 className="  font-bold text-lg">{tour.name}</h1>
+    <h1 className=" hover:text-orange-800 cursor-default font-bold text-lg"  onClick={()=>{handleView(tour)}} >{tour.name}</h1>
+  
     <StarRatings 
           rating={tour.ratingAverage}
           starDimension="20px"
@@ -149,17 +191,10 @@ if(searchquery){
         />
         
     
-    <div className="mt-2"> {tour.Location} </div>
-    <div className=""> {tour.price} </div>
+  
+    <div className="mt-2"> {`Rs ${tour.price}`} </div>
   </div>
-        <div className="flex mt-4  gap-x-12  ">
-          <div>
-          <button className="bg-black  text-white  rounded-md	hover:bg-neutral-800 py-2 px-4" onClick={()=>{handleView(tour)}}>View</button>
-          </div>
-          <div>
-          <button  className="bg-black text-white rounded-lg hover:bg-neutral-800  py-2 px-4"  onClick={()=>{handleAddToCart(tour)}}>Add to Bookings</button>
-           </div>
-        </div>
+     
         </div>
       </div>
       

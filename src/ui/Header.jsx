@@ -1,28 +1,22 @@
 import {Link} from "react-router-dom"
-import SearchBooking from "../features/booking/SearchBooking"
 import { useLocation } from "react-router-dom";
 import logo from "../images/logo4.png"
 import { useSelector,useDispatch } from "react-redux";
-import { Signout } from "../features/auth/Signout";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { signout } from "../services/authApi";
 import { updateName } from '../features/users/userSlice';
-import { updateRole } from '../features/users/userSlice';
+import { updateRole, logout } from '../features/users/userSlice';
+
 function Header(){
 
    const dispatch = useDispatch()
-      const mutation = useMutation(signout);
-  
+     
      async function signoutfun(){
-         console.log('funcalled')
          try {
-            await mutation.mutateAsync({}); // Wait for mutation to complete
-            console.log(mutation.data);
+            dispatch(logout());
+
             dispatch(updateName(''));
             dispatch(updateRole(''));
           } catch (error) {
-            console.log(error);
           }
 
       }    
@@ -30,13 +24,19 @@ function Header(){
 
 
      const username = useSelector((state)=> state.user.username)
+     let expireAt = useSelector((state)=> state.user.expiresAt)
+     let currentDate = new Date();
+     let formattedDate = currentDate.toISOString();
      const role = useSelector((state)=> state.user.role)
      const [profileDropdown, setprofileDropdown] = useState()
-     console.log(role)  
      const location = useLocation();
      const currentRoute = location.pathname;
-     console.log(currentRoute)
-    
+
+if(formattedDate> expireAt){
+   dispatch(logout());
+   dispatch(updateRole(''));
+}
+
         return(
             
             <div className="flex h-20 sticky  top-0 bg-black pb-3 pt-2 z-10 ">
@@ -72,7 +72,7 @@ function Header(){
                     
                
 
-                        <span className="text-orange-500 material-symbols-outlined pl-8 pb-2 cursor-pointer mr-8 pt-3 hover:text-orange-700"  >
+                        <span className="text-orange-500 material-symbols-outlined pl-8 pb-2 cursor-pointer mr-8 pt-3 hover:text-orange-700 "  >
                      <Link to="/cart">
                           favorite
                         </Link>
@@ -103,15 +103,4 @@ function Header(){
 
 export {Header}
 
-   /*                       {      username &&
-                       (
-                        <>
-                   <Signout></Signout>
-                   {
-                      role === 'admin' &&
-                      <div>create</div>
-                   }
-                   </>
-                       )
-                       }
-                      */ 
+ 

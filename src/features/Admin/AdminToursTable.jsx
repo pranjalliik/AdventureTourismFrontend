@@ -1,24 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTours} from "../../services/apiTours";
 import { TailSpin } from "react-loader-spinner";
-import { TourTableRow } from "./TourTableRow";
 import { Chart } from "./Chart";
 import{useState,useEffect} from 'react';
 import axios from 'axios'
 
 function AdminToursTable({modelState,setCurrDetails,setCurrSlot}){
+  const api_url = process.env.REACT_APP_API_URL;
 
   const[data,setData] = useState([])
  
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/tours');
-            console.log(res);
+            const res = await axios.get(`${api_url}/tours`);
             setData(res.data.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
-            // Handle error, if needed
+          
         }
     };
 
@@ -29,9 +25,7 @@ function AdminToursTable({modelState,setCurrDetails,setCurrSlot}){
 
 
 
-function handleOnAdd(tour){
 
-}
 
     return(
         <>
@@ -70,7 +64,7 @@ function handleOnAdd(tour){
     </tbody>
     <tbody>
     {  data.map((tour)=>(
-      <tr >
+      <tr   key={tour._id}>
     <td className="border border-slate-700 flex"  >
       <div style={{ backgroundImage: `url(${require(`./../../images/${tour.photo}`)})` }}
       alt="" className="h-24 w-32 bg-contain bg-no-repeat mt-2 ml-2"></div>

@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllSlots } from "../../../services/apiBook";
 import { useParams } from "react-router-dom";
 import { TailSpin } from 'react-loader-spinner'
 import {Model} from "../../../ui/Model"
@@ -36,11 +34,9 @@ Slot = useSelector((state)=> state.slot.Slot);
 console.log(Slot)
 
 const hashMap = useMemo(() => {
-  console.log('hii'); // This line will execute only when Slot changes
   return mapdates(Slot);
 }, [Slot]);
 
-console.log(hashMap)
 
 function modelState(){
   setModel(!modelOpen)
@@ -74,12 +70,12 @@ wrapperClass=""
 visible={true}
 />
 ) :
-Array.from(hashMap.entries()).map(([key, value]) => (
-<div className="bg-gray-300 rounded-lg my-4">
+Array.from(hashMap.entries()).map(([key, value],idx) => (
+<div className="bg-gray-300 rounded-lg my-4" key={`${idx}${value[0]._id}`} >
 <div className="	font-semibold ml-1 p-1">{key}</div>
 <div className="flex gap-x-6 ">
   { value.map((slot )=>(
-   <div className=" ml-1 mb-2 p-2 font-semibold bg-black hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot,key)}>
+   <div key={slot._id} className=" ml-1 mb-2 p-2 font-semibold bg-black hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot,key)}>
 {slot.time}
    </div>   
   )) }

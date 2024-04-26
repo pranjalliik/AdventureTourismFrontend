@@ -9,13 +9,11 @@ function Signout() {
   const handleClick = async (event) => {
     event.preventDefault();
     try {
-        console.log("fjkl")
       const response = await signout();
       // Perform further actions or redirect to another page.
       dispatch(updateName(''))
     } catch (error) {
-      console.error('Sign-out failed:', error);
-      // Display error message or handle the failure case.
+
     }
   };
 

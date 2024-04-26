@@ -13,7 +13,8 @@ import NoOfPeople from "../booking/noOfPeople";
 function Viewtour(){
     let parm = useParams()
     const [showModal,setModal] = useState(false)
-  
+    const api_url = process.env.REACT_APP_API_URL;
+
 
     const modelState = () => {
         setModal(!showModal)
@@ -25,7 +26,7 @@ function Viewtour(){
         queryKey: ["Tour"],
         queryFn: async function getTour(id){
             try{
-            const res = await  axios.get(`http://localhost:5000/tours/${parm.id}`) 
+            const res = await  axios.get(`${api_url}/tours/${parm.id}`) 
                      return res;
             }
         catch(err){

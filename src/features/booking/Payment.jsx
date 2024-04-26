@@ -2,6 +2,7 @@ import axios from 'axios'
 
 
 function loadScript(src) {
+
 	return new Promise((resolve) => {
 		const script = document.createElement('script')
 		script.src = src
@@ -17,6 +18,7 @@ function loadScript(src) {
 
 
 function Payment({tourId}){
+  const api_url = process.env.REACT_APP_API_URL;
 
     async function displayRazorpay() {
 		const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -27,7 +29,7 @@ function Payment({tourId}){
 		}
 
 		const data =  await axios.post(
-            `http://localhost:5000/book/${tourId}`,
+            `${api_url}/book/${tourId}`,
             
             {
               headers: { 'Content-Type': 'application/json' },

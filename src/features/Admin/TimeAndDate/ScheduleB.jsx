@@ -1,10 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { getAllSlot } from "./SlotSlice"; 
 import { useParams } from "react-router-dom";
 import { TailSpin } from 'react-loader-spinner'
 import {Model} from "../../../ui/Model"
 import { useState ,useEffect} from "react";
-import { mapdates } from "../../../services/apiBook";
 import { EditdntB } from "./EditDntB";
 import { useSelector } from "react-redux/es/hooks/useSelector"
 import  {useDispatch} from 'react-redux'
@@ -28,8 +26,7 @@ function ScheduleB(){
 
 
     data = useSelector((state)=> state.slot.Slot);
-    console.log(data)    
-  
+
 function modelState(){
   setModel(!modelOpen)
   
@@ -46,7 +43,6 @@ function modelState(){
 function displayDate(x){
   const formattedDate = x.toLocaleString();
   let dateData = formattedDate.split('T18:30:00.000Z')
-  console.log(formattedDate)
   return dateData[0];
 }
 
@@ -70,7 +66,7 @@ function displayDate(x){
     ) :
     data.map((slot) => (
         
-        <div className=" p-2 bg-orange-700 font-semibold  hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot)}  >{displayDate(slot.date)}</div>
+        <div key={slot._id} className=" p-2 bg-orange-700 font-semibold  hover:opacity-70 text-white rounded-md" onClick={()=> handleClick(slot)}  >{displayDate(slot.date)}</div>
 
         
      

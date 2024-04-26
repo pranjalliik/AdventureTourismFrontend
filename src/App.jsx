@@ -33,7 +33,6 @@ axios.defaults.withCredentials = true;
 function App(){
   const role = useSelector((state)=> state.user.role)
 
-console.log(role)
 
        const queryClient = new QueryClient({
               defaultOptions: {
@@ -45,7 +44,7 @@ console.log(role)
             });
 
            const errorHandler = (error,errorInfo)=>{
-            console.log("Loging ",error, errorInfo)
+           // console.log("Loging ",error, errorInfo)
            } 
 
  return(

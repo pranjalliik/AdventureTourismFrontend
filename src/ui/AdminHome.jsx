@@ -3,7 +3,6 @@ import { AdminToursTable } from "../features/Admin/AdminToursTable"
 import { Model } from "./Model"
 import { UpdateTour } from "../features/Admin/updateTour"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 
 function AdminHome(){
  
@@ -34,7 +33,6 @@ const [addSlotTour,setAddSlotTour] = useState()
        Image : photo,
        id : _id
       });
-      console.log(currDetails)
     };
   
     return(

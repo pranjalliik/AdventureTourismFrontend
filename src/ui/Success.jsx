@@ -11,7 +11,6 @@ function Success(){
   const quant = searchParams.get('quant');
   useEffect(() => {
    let res =  createBooking({id:slot,no: quant})
-   console.log(res)
   }, []);
     return(
         <div className="flex items-center justify-center min-h-screen bg-gray-100">

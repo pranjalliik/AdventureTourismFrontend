@@ -3,7 +3,6 @@
 
 
 import React, {useState,useEffect} from "react";
-import axios from 'axios'
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { TailSpin } from "react-loader-spinner";
@@ -11,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { deleteItem } from "./cartSlice";
 import { getCartItems } from "./cartSlice";
 import { Link } from "react-router-dom";
+
+
   function Cart() {
     const dispatch = useDispatch()
 
@@ -26,13 +27,8 @@ import { Link } from "react-router-dom";
   let {fetchedTours,status} = useSelector((state)=> (state.cart))
 
 
-  function handledelete(idx){
-     dispatch(deleteItem(idx))
-  }
-
-  if(items){
-    console.log(items)
-
+  function handledelete(id){
+     dispatch(deleteItem(id))
   }
 
 
@@ -93,7 +89,7 @@ import { Link } from "react-router-dom";
             <div className="flex items-center space-x-4">
               <p className="text-sm">Rs {` ${item.price}`}</p>
               <svg
-                onClick={()=>handledelete(idx+1)}
+                onClick={()=>handledelete(item._id)}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

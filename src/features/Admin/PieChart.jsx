@@ -1,11 +1,10 @@
 import { Pie } from "react-chartjs-2";
-import {Chart as ChartJS} from "chart.js/auto"
 import { useState,useEffect ,useMemo} from "react";
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios'
 import { TailSpin } from "react-loader-spinner";
 
 function PieChart(){
+  const api_url = process.env.REACT_APP_API_URL;
 
 let data
 let options
@@ -13,10 +12,9 @@ const[TourSales,setTourSales] = useState()
 
 const fetchData = async () => {
   try {
-      const res = await axios.get("http://localhost:5000/tours/toursales");
+      const res = await axios.get(`${api_url}/tours/toursales`);
       return res.data.data;
   } catch (error) {
-      console.error('Error fetching data:', error);
       return [];
   }
 };
@@ -42,7 +40,6 @@ for (const [key, value] of Object.entries(TourSales)) {
   tour.push(key)
   sales.push(value)
 }
-console.log(tour, sales)
 
      data = {
         datasets: [{

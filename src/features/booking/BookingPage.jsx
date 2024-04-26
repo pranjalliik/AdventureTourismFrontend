@@ -1,13 +1,9 @@
 
-import { useQuery } from "@tanstack/react-query";
-import { getAllSlots } from "../../services/apiBook";
-import { useParams } from "react-router-dom";
+
 import { TailSpin } from 'react-loader-spinner'
 import {Modelt} from "../../ui/Modelt"
 import { useState } from "react";
-import { mapdates } from "../../services/apiBook";
-import { set } from "mongoose";
-import { Schedule } from "../Admin/TimeAndDate/ScheduleA";
+
 
 function BookingPage({ hashMap, children ,setSlot}){
 
@@ -29,6 +25,7 @@ function handleClick(slot){
  <div className="ml-20 mt-10 p-6 bg-gray-300 box-border mr-6 rounded-lg shadow-lg" style={{boxShadow : "2px 2px  15px 2px  gray  "}}  >
         {
             hashMap.size === 0? (
+              <div className="flex justify-center">
       <TailSpin
       height="80"
       width="80"
@@ -39,6 +36,7 @@ function handleClick(slot){
       wrapperClass=""
       visible={true}
     />
+    </div>
     ) :
 
         Array.from(hashMap.entries()).map(([key, value]) => (

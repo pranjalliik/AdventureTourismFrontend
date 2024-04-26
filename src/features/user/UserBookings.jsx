@@ -10,7 +10,8 @@ function UserBookings(){
         queryKey: ["userBookings"],
         queryFn: getUserBookings,
       });
-  if(bookings)console.log(bookings)
+
+  const api_url = process.env.REACT_APP_API_URL;
 
 
   const[data,setData] = useState()
@@ -18,12 +19,10 @@ function UserBookings(){
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/book/getreviewbooking');
-            console.log(res);
+            const res = await axios.get(`${api_url}/book/getreviewbooking`);
             setData(res.data.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
-            // Handle error, if needed
+
         }
     };
 
@@ -32,12 +31,10 @@ function UserBookings(){
 
 
 
-console.log(data)
-
-
     return(
         <>
        { isLoading? (
+        <div className="flex justify-center">
       <TailSpin
       height="80"
       width="80"
@@ -47,7 +44,7 @@ console.log(data)
       wrapperStyle={{}}
       wrapperClass=""
       visible={true}
-    />
+    /></div>
     ) : 
      <div className="flex w-full h-full">
       <div className="w-7/12 flex justify-center bg\-black">
@@ -55,7 +52,7 @@ console.log(data)
 
             {bookings.length !== 0?
              <>
-           {bookings.map((booking)=>(     <div className="p-4  rounded-lg w-full bg-gray-100 flex shadow-md">
+           {bookings.map((booking)=>(     <div key={booking._id} className="p-4  rounded-lg w-full bg-gray-100 flex shadow-md">
            
            <div className=" flex justify-center items-center pr-3">
           <p className="text-center font-semibold text-lg text-center">{booking.tour.name}</p>
@@ -87,6 +84,7 @@ console.log(data)
   {
       !data?
       (
+      
         <TailSpin
         height="80"
         width="80"
@@ -101,8 +99,8 @@ console.log(data)
          data.length !== 0?  (
             <div className="flex h-full flex-row bg-lack justify-between	 w-5/12">
           {data.map((rb)=>(    
-<>
-        <div className="mt-6 h-full mt-10 rounded-lg border bg-white p-6 shadow-md  w-2/5">
+
+        <div key={rb._id} className="mt-6 h-full mt-10 rounded-lg border bg-white p-6 shadow-md  w-2/5">
           
 
 
@@ -127,7 +125,7 @@ console.log(data)
 
         </div>
 
-        </>
+        
           ))}
         </div>
         ) : (

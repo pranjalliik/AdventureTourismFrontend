@@ -34,10 +34,11 @@ function handleChange(event){
         case "hours":
           setHours(value);
           break;
-         case "capacity":
-         setCapacity(value) 
+          case "min":
+            setMin(value);
+            break;
         default:
-          setMin(value);
+          setCapacity(value);
           break;
       }
 }
@@ -60,10 +61,11 @@ function handleSubmit(event){
         day: day,
         hours: hours,
         min: min,
-        capacity : capacity
+        capacity : capacity,
+        scheduleType : 'hourWise',
+        capacityLeft : capacity
       };
-console.log(data);
-console.log(parm.id)
+
     
 dispatch(createSlot({ sdata: data, id:  parm.id  }));
 

@@ -9,6 +9,7 @@ import axios from 'axios'
 
 
 function Schedule(){
+  const api_url = process.env.REACT_APP_API_URL;
 
     let parm = useParams()
 
@@ -18,7 +19,7 @@ function Schedule(){
         queryKey: ["Tour"],
         queryFn: async function getTour(id){
             try{
-            const res = await  axios.get(`http://localhost:5000/tours/${parm.id}`) 
+            const res = await  axios.get(`${api_url}/tours/${parm.id}`) 
                      return res;
             }
         catch(err){
@@ -30,12 +31,6 @@ function Schedule(){
   
   
 
-
-
-
-  if(info){
-    console.log(info)
-  }
 
 
 

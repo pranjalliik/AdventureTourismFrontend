@@ -43,7 +43,7 @@ export default function AboutUs() {
 
 
 
-        <a href="#" className="text-gray-400 hover:text-gray-500">
+        <a href="https://github.com/pranjalliik/" target="_blank" className="text-gray-400 hover:text-gray-500">
           <span className="sr-only">GitHub</span>
           <svg
             className="w-6 h-6"
@@ -59,7 +59,7 @@ export default function AboutUs() {
           </svg>
         </a>
       
-        <a href="#" className="text-gray-400 hover:text-gray-500">
+        <a href="https://www.linkedin.com/in/pranjali-kaushik-506554281/" target="_blank" className="text-gray-400 hover:text-gray-500">
   <span className="sr-only">LinkedIn</span>
   <svg
     className="w-6 h-6"

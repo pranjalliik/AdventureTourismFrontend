@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { signup } from '../../services/authApi'; 
 import { useErrorBoundary } from "react-error-boundary";
 import  {useSelector,useDispatch} from 'react-redux'
 import { updateName } from '../users/userSlice';
 import { updateRole } from '../users/userSlice';
 import { updateEmail } from '../users/userSlice';
 import { useLocation,useNavigate } from 'react-router-dom';
-
+import { ThreeDots } from 'react-loader-spinner';
+import {signup} from '../users/userSlice';
 
 
 const SignupForm = () => {
@@ -19,30 +19,21 @@ const SignupForm = () => {
  const location = useLocation()
  const navigate = useNavigate()
 
+
+ let status = useSelector((state)=> state.user.status);
+ let error = useSelector((state)=> state.user.error);
+ 
   async function handleSubmit  (e)  {
 
 
     e.preventDefault();
-    // Perform signup logic here
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-    // Reset form fields
+   
       
-     const data =  {
-name : name,
-email : email,
-"password" :password,
-"confirmPassword" : confirmPassword
 
-}
-const response  = await signup(data )
 
-console.log(response)
-dispatch(updateName(response.data.data.name))
-dispatch(updateRole(response.data.data.role))
-dispatch(updateEmail(response.data.data.email))
+dispatch(signup({name, email,password,confirmPassword}))
+
+
 
 if(location.state?.from){
   navigate(location.state.from)
@@ -61,7 +52,7 @@ if(location.state?.from){
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className='text-black ml-2' />
+          className='text-black ml-2' required/>
       </div>
       <div  className='flex gap-x-16 '> 
         <label className='text-lg font-semibold' htmlFor="email">Email:</label>
@@ -70,7 +61,7 @@ if(location.state?.from){
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className='text-black ml-2' />
+          className='text-black ml-2'  required/>
       </div>
       <div className='flex gap-x-8 '>
         <label className='text-lg font-semibold' htmlFor="password">Password:</label>
@@ -79,7 +70,7 @@ if(location.state?.from){
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className='text-black ml-2' />
+          className='text-black ml-2'  required/>
       </div>
       <div className='flex gap-x-8' >
         <label className='text-lg font-semibold' htmlFor="confirmPassword">Confirm <br/>Password:</label>
@@ -88,9 +79,25 @@ if(location.state?.from){
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className='text-black h-7 ml-2'/>
+          className='text-black h-7 ml-2' required/>
       </div>
       <button type="submit" className=' bg-orange-700 px-4 py-2 rounded-lg'>Sign Up</button>
+      {status === 'loading' ?
+      <div  className="ml-32">
+      <ThreeDots
+      
+       // Change type of loader (options: Audio, BallTriangle, Bars, Circles, Grid, Hearts, Oval, Puff, Rings, TailSpin, ThreeDots, Watch)
+        color="#D3D3D3" // Change color of loader
+        height={10} // Set height of loader
+        width={100} // Set width of loader
+      />
+      </div> :
+      status === 'failed' ?
+      <div className='relative pt-1'>
+      <div className='text-red-500 font-semibold absolute bottom-1 ml-20'>{error}</div>
+      </div>
+      :<></>
+      }
     </form>
     </div>
   );
