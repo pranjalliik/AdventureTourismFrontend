@@ -30,7 +30,7 @@ export const signin = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-
+      console.log(error.response.data.message)
       if (error.response && error.response.status === 401) {
         
         throw new Error('Wrong Credentials');
