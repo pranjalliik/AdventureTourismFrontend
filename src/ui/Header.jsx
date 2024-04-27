@@ -4,7 +4,7 @@ import logo from "../images/logo4.png"
 import { useSelector,useDispatch } from "react-redux";
 import { useState } from "react";
 import { updateName } from '../features/users/userSlice';
-import { updateRole, logout } from '../features/users/userSlice';
+import { updateRole, signout } from '../features/users/userSlice';
 
 function Header(){
 
@@ -12,10 +12,10 @@ function Header(){
      
      async function signoutfun(){
          try {
-            dispatch(logout());
+            dispatch(signout());
 
-            dispatch(updateName(''));
-            dispatch(updateRole(''));
+       //     dispatch(updateName(''));
+         //   dispatch(updateRole(''));
           } catch (error) {
           }
 
@@ -33,8 +33,8 @@ function Header(){
      const currentRoute = location.pathname;
 
 if(formattedDate> expireAt){
-   dispatch(logout());
-   dispatch(updateRole(''));
+            dispatch(signout());
+  // dispatch(updateRole(''));
 }
 
         return(
