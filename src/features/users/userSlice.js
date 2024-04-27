@@ -30,7 +30,6 @@ export const signin = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error.response.data.message)
       if (error.response && error.response.status === 401) {
         
         throw new Error('Wrong Credentials');
@@ -59,7 +58,7 @@ export const signup = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 401 || 400) {
-        if(error.response.data.message === 'Duplicate field Please use another value!'){
+        if(error.response.data && error.response.data.message === 'Duplicate field Please use another value!'){
         throw new Error('Email Already Registered');
         }    
       }else{
