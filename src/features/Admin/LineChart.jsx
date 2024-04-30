@@ -33,7 +33,8 @@ function LineChart(){
 
 const fetchData = async () => {
   try {
-      const res = await axios.get(`${api_url}/tours/monthlysales`);
+      const res = await axios.get(`${api_url}/tours/monthlysales`, {
+  withCredentials: true });
       return res.data.data;
   } catch (error) {
       return [];
