@@ -101,7 +101,7 @@ function App(){
 
     <Route path="/success" element={<Success/>}/>
      
-     <Route path="/tours" element={
+     <Route path="/tour" element={
             <>
            <Tour></Tour>
            </>
@@ -110,7 +110,7 @@ function App(){
  
 
     
-     <Route path="/tours/:id" element={
+     <Route path="/tour/:id" element={
             <>
             <Viewtour></Viewtour>
            </>
