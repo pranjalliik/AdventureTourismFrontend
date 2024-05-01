@@ -54,7 +54,7 @@ let navigate = useNavigate();
 
 function handleView(tour){
   let id = tour._id
-  navigate(`/tours/${id}`);
+  navigate(`/tour/${id}`);
 }
 
 
