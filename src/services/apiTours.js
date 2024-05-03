@@ -4,6 +4,7 @@ import axios from 'axios'
 let api_url = process.env.REACT_APP_API_URL;
 
 export async function getTours(){
+      console.log(`${api_url}/tours`)
 const res = await fetch(`${api_url}/tours`)
 
 const {data} = await res.json();
@@ -32,6 +33,8 @@ catch(err){
 
 
 export async function getthreeTours(){
+
+
     const res = await fetch(`${api_url}/tours/topthree`)
     const {data} = await res.json();
     
