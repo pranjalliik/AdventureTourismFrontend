@@ -69,7 +69,7 @@ function Banner(){
 
          <div className="text-white text-3xl font-bold absolute top-28 left-16">Embark on Extraordinary Journeys<br/>
            to Uncharted Destinations!</div>
-           <Link to="tours" className="bg-orange-700 p-4 absolute top-48 left-8 rounded-lg text-white font-bold text-xl py-2 h-12 w-40 mt-4 ml-10" >FIND A TOUR</Link>
+           <Link to="tour" className="bg-orange-700 p-4 absolute top-48 left-8 rounded-lg text-white font-bold text-xl py-2 h-12 w-40 mt-4 ml-10" >FIND A TOUR</Link>
            </>
         ):(
         <div className=" justify-end flex h-full w-full">
