@@ -84,7 +84,7 @@ async function loadPaymentPage(response){
      }
   
      const options = {
-         key:  process.env.REACT_APP_KEY ,
+         key:  process.env.REACT_APP_KEY || 'rzp_test_oeAvpf9MwJ4OX9' ,
          currency: response.data.currency,
          amount: response.data.amount.toString(),
          order_id: response.data.id,
