@@ -46,13 +46,13 @@ if(formattedDate> expireAt){
                  <div className="flex w-2/3 justify-end pr-14 gap-x-4 pt-2">
                     {
                       currentRoute   === '/' ?
-                      <Link to="tours" className="text-orange-500 font-bold text-xl pl-14 py-2 hover:text-orange-700">TOURS</Link>
+                      <Link to="tour" className="text-orange-500 font-bold text-xl pl-14 py-2 hover:text-orange-700">TOURS</Link>
                :
                   <>
                <Link to="/"  className=" text-orange-500 font-bold text-xl pl-14 py-2 hover:text-orange-700">HOME</Link>   
-               {currentRoute   !== '/tours' &&
+               {currentRoute   !== '/tour' &&
                
-               <Link to="tours" className="bg-orange-600 p-4 rounded-lg text-white font-bold text-xl py-2 h-11 ml-10">FIND A TOUR</Link> 
+               <Link to="tour" className="bg-orange-600 p-4 rounded-lg text-white font-bold text-xl py-2 h-11 ml-10">FIND A TOUR</Link> 
 
               }
                </>
